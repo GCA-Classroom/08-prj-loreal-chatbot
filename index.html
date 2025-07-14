@@ -19,21 +19,23 @@
     <div class="page-wrapper">
       <!------- Header / Branding ------->
       <header class="site-header">
+        <img src="img/loreal-logo.png" alt="L’Oréal Logo" class="site-logo" />
+
         <h1 class="site-title">Smart Product Advisor</h1>
       </header>
 
       <!------- Chat Area ------->
       <main>
         <section class="chatbox">
-          <div id="chatWindow" class="chat-window">
+          <div id="chat-box" class="chat-window">
             <!-- messages will be appended here via JS -->
           </div>
 
-          <form id="chatForm" class="chat-form">
-            <label for="userInput" class="visually-hidden">Message</label>
+          <form id="chat-form" class="chat-form">
+            <label for="chat-input" class="visually-hidden">Message</label>
             <input
-              id="userInput"
-              name="userInput"
+              id="chat-input"
+              name="chat-input"
               type="text"
               placeholder="Ask me about products or routines…"
               autocomplete="off"
@@ -60,7 +62,7 @@
     </div>
 
     <!-- secrets.js can be removed when using Cloudflare Workers for API requests -->
-    <script src="secrets.js"></script>
+    
     <script src="script.js"></script>
   </body>
 </html>
