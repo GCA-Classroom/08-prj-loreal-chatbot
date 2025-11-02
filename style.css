@@ -250,3 +250,26 @@ body {
     font-size: 17px;
   }
 }
+/* ── Stack messages vertically & force one-per-line ── */
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  /* 줄 간격 */
+  gap: 10px;
+}
+
+/* 각 요소가 자신의 줄을 차지하도록 block 처리 */
+.user-msg,
+.bot-msg,
+.question-banner {
+  display: block;        /* <- 핵심 */
+  width: fit-content;
+  max-width: 80%;
+}
+
+/* 정렬: 사용자(오른쪽), 봇(왼쪽) */
+.user-msg { margin-left: auto; }   /* 오른쪽 정렬 */
+.bot-msg { margin-right: auto; }   /* 왼쪽 정렬 */
+
+/* 첫 줄과 다음 줄 간 살짝 간격 */
+.chat-window > *:first-child { margin-top: 0; }
