@@ -1,143 +1,252 @@
-/* —— basic reset —— */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* ===== Brand palette ===== */
+:root {
+  --black: #000000;
+  --white: #FFFFFF;
+  --red:   #FF003B;
+  --gold:  #E3A535;
+
+  /* neutrals */
+  --ink-weak: #444;      /* 보조 텍스트 */
+  --line: #111;          /* 테두리 */
+  --bg-soft: #F7F7F7;    /* 옅은 회색 배경 */
 }
+
+/* —— basic reset —— */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 /* —— body + fonts —— */
 body {
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  color: #333;
+  font-family: "Montserrat", Arial, Helvetica, sans-serif; /* L’Oréal 스타일 참고 */
+  background: var(--white);    /* 화이트 베이스 */
+  color: var(--black);         /* 블랙 텍스트 */
   display: flex;
   justify-content: center;
 }
 
-.page-wrapper {
-  width: 90%;
-  max-width: 900px;
-}
+.page-wrapper { width: 90%; max-width: 900px; }
 
-/* header */
-.site-header {
-  text-align: center;
-  padding-top: 50px;
-}
-
+/* ===== Header ===== */
+.site-header { text-align: center; padding-top: 50px; }
 .site-title {
-  font-size: 22px;
-  font-weight: 500;
-  margin-bottom: 10px;
+  font-size: 22px; font-weight: 600; letter-spacing: .02em; margin-bottom: 10px;
 }
 
-/* chat window */
-.chatbox {
-  margin: 40px 0;
-}
+/* ===== Chat container ===== */
+.chatbox { margin: 40px 0; }
 
+/* ===== Chat window ===== */
 .chat-window {
-  height: 360px;
-  border: 1px solid #000;
+  height: 380px;
+  border: 2px solid var(--gold);      /* 전체 창 골드 테두리 */
+  border-radius: 12px;
   padding: 20px;
   font-size: 18px;
   line-height: 1.5;
   overflow-y: auto;
-  background: #fafafa;
+  background: var(--white);
   white-space: pre-line;
 }
 
-/* messages */
-.msg {
-  margin-bottom: 14px;
-  line-height: 1.5;
+/* ===== Question banner (latest user question) ===== */
+.question-banner {
+  display: block;
+  margin: 12px 6px 6px;
+  padding: 8px 12px;
+  border-left: 4px solid var(--red);
+  background: #fff2f4;            /* 은은한 레드 틴트 */
+  color: var(--black);
+  font-size: 14px;
+  line-height: 1.4;
+  border-radius: 8px;
+  box-shadow: 0 1px 0 rgba(0,0,0,.04);
+}
+.question-banner strong { color: var(--red); }
+
+/* ===== Chat bubbles ===== */
+.user-msg, .bot-msg {
+  display: inline-block;
+  max-width: 80%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  line-height: 1.55;
+  font-size: 16px;
+  margin: 10px 0;
+  word-break: break-word;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-.msg.user {
-  color: #000;
+/* 사용자: 블랙 배경 + 골드 테두리 (오른쪽 정렬) */
+.user-msg {
+  background-color: var(--black);
+  color: var(--white);
+  border: 2px solid var(--gold);
+  align-self: flex-end;
+  margin-left: auto;
+  margin-right: 6px;
+  text-align: right;
+  border-top-right-radius: 4px;
 }
 
-.msg.ai {
-  color: #666666;
+/* 봇: 화이트 배경 + 레드 테두리 (왼쪽 정렬) */
+.bot-msg {
+  background-color: var(--white);
+  color: var(--black);
+  border: 2px solid var(--red);
+  align-self: flex-start;
+  margin-left: 6px;
+  margin-right: auto;
+  text-align: left;
+  border-top-left-radius: 4px;
 }
 
-/* input row */
+/* 부드러운 등장 애니메이션 */
+@keyframes pop-in {
+  from { transform: translateY(4px); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+.pop-in { animation: pop-in .18s ease-out; }
+
+/* ===== Input row ===== */
 .chat-form {
   display: flex;
   gap: 12px;
   margin-top: 16px;
 }
+.chat-form input, .chat-form button { height: 48px; }
 
 .chat-form input {
   flex: 1;
-  padding: 12px;
-  border: 1px solid #ccc;
+  padding: 12px 14px;
+  border: 2px solid var(--black);
+  border-radius: 10px;
   font-size: 18px;
+  background: var(--white);
+  color: var(--black);
 }
-
-.chat-form input:focus {
-  outline: 2px solid #000;
-  outline-offset: 2px;
-}
+.chat-form input::placeholder { color: #888; }
+.chat-form input:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
 
 .chat-form button {
   font-size: 18px;
-  background: #000;
-  color: #fff;
-  border: none;
+  background: var(--black);
+  color: var(--white);
+  border: 2px solid var(--black);
+  border-radius: 10px;
   padding: 12px;
   width: 48px;
-  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: filter .2s ease, background .2s ease, border-color .2s ease;
 }
+.chat-form button .material-icons { font-size: 24px; }
+.chat-form button:hover { background: var(--red); border-color: var(--red); }
+.chat-form button:active { filter: brightness(0.95); }
+.chat-form button:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
 
-.chat-form button .material-icons {
-  font-size: 24px;
-}
-
-.chat-form button:hover {
-  background: #666666;
-}
-
-.chat-form button:focus {
-  outline: 2px solid #000;
-  outline-offset: 2px;
-}
-
-/* visually hidden */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* footer */
+/* ===== Footer ===== */
 .site-footer {
-  margin: 60px 0 40px;
-  text-align: center;
-  font-size: 14px;
-  color: #666;
+  margin: 60px 0 40px; text-align: center; font-size: 14px; color: var(--ink-weak);
 }
-
-.site-footer nav {
-  margin-top: 12px;
-}
-
+.site-footer nav { margin-top: 12px; }
 .site-footer a {
-  margin: 0 8px;
-  color: #000;
-  text-decoration: none;
+  margin: 0 8px; color: var(--black); text-decoration: none; border-bottom: 2px solid transparent;
+}
+.site-footer a:hover { color: var(--red); border-color: var(--gold); }
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .chat-window { height: 60vh; }
 }
 
-.site-footer a:hover {
-  color: #666666;
+/* restore visually-hidden utility */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Mobile tweaks */
+@media (max-width: 480px) {
+  .page-wrapper { width: 94%; }
+
+  .site-header { padding-top: 24px; }
+  .site-title { font-size: 18px; margin-bottom: 6px; }
+
+  .chat-window {
+    height: 58vh;
+    padding: 14px;
+    font-size: 16px;
+  }
+
+  .user-msg, .bot-msg {
+    max-width: 88%;
+    font-size: 15px;
+    margin: 8px 0;
+  }
+
+  .question-banner {
+    margin: 8px 4px 6px;
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  .chat-form {
+    position: sticky;
+    bottom: 0;
+    background: var(--white);
+    padding: 8px 0;
+    gap: 8px;
+  }
+  .chat-form input, .chat-form button { height: 44px; }
+  .chat-form input { font-size: 16px; padding: 10px 12px; }
+  .chat-form button { width: 44px; }
+  .chat-form button .material-icons { font-size: 22px; }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .chat-window { height: 62vh; }
+  .user-msg, .bot-msg { max-width: 85%; }
+}
+/* --- L’Oréal 로고 크기 조정 (이미지 버전) --- */
+.site-header img {
+  display: block;
+  margin: 0 auto;
+  max-width: 220px; /* 기본 크기 */
+  height: auto;
+}
+
+/* 작은 화면 (모바일) */
+@media (max-width: 480px) {
+  .site-header {
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
+
+  .site-header img {
+    max-width: 140px;  /* 로고 자동 축소 */
+    height: auto;
+  }
+
+  .site-title {
+    font-size: 15px;
+    margin-top: 6px;
+  }
+}
+
+/* 중간 크기 화면 (태블릿 등) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .site-header img {
+    max-width: 180px; /* 태블릿에서 약간 줄이기 */
+  }
+  .site-title {
+    font-size: 17px;
+  }
 }
