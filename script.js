@@ -1,18 +1,56 @@
-/* DOM elements */
 const chatForm = document.getElementById("chatForm");
 const userInput = document.getElementById("userInput");
 const chatWindow = document.getElementById("chatWindow");
 
-// Set initial message
-chatWindow.textContent = "👋 Hello! How can I help you today?";
+// ✅ Your deployed Cloudflare Worker URL
+const WORKER_URL = "https://wanderbot-worker.fatoumata6871.workers.dev/";
 
-/* Handle form submit */
-chatForm.addEventListener("submit", (e) => {
+let messages = [
+  {
+    role: "system",
+    content: "You are a friendly skincare and product advisor.",
+  },
+];
+
+// Append messages to chat
+function appendMessage(role, content) {
+  const msg = document.createElement("div");
+  msg.classList.add("msg", role);
+  msg.textContent = content;
+  chatWindow.appendChild(msg);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+
+/* —— Handle chat input —— */
+chatForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  // When using Cloudflare, you'll need to POST a `messages` array in the body,
-  // and handle the response using: data.choices[0].message.content
+  const userMsg = userInput.value.trim();
+  if (!userMsg) return;
 
-  // Show message
-  chatWindow.innerHTML = "Connect to the OpenAI API for a response!";
+  // show user message
+  appendMessage("user", userMsg);
+  userInput.value = "";
+
+  messages.push({ role: "user", content: userMsg });
+
+  // placeholder while waiting
+  appendMessage("ai", "💭 Thinking...");
+
+  try {
+    const res = await fetch(WORKER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages }),
+    });
+
+    const data = await res.json();
+    const aiMsg = data.content || data.error || "⚠️ No response from AI.";
+
+    chatWindow.lastChild.textContent = aiMsg;
+    messages.push({ role: "assistant", content: aiMsg });
+  } catch (err) {
+    chatWindow.lastChild.textContent = "❌ Something went wrong. Try again.";
+    console.error("Fetch error:", err);
+  }
 });
