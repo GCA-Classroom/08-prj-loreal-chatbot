@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>L’Oréal Smart Product Advisor</title>
+    <title>Smart Product Advisor</title>
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -19,27 +19,29 @@
     <div class="page-wrapper">
       <!-- Header -->
       <header class="site-header">
-        <img src="loreal-logo.png" alt="L’Oréal Logo" class="logo" />
         <h1 class="site-title">Smart Product Advisor</h1>
-        <p class="subtitle">Discover your perfect L’Oréal routine 💋</p>
       </header>
 
       <!-- Chat Section -->
       <main>
         <section class="chatbox">
-          <div id="statusArea"></div>
-          <div id="chatWindow" class="chat-window"></div>
+          <div id="chatWindow" class="chat-window">
+            👋 Hello! How can I help you today?
+          </div>
 
           <form id="chatForm" class="chat-form">
+            <label for="userInput" class="visually-hidden">Message</label>
             <input
               id="userInput"
+              name="userInput"
               type="text"
-              placeholder="Ask me about L’Oréal products or beauty routines..."
+              placeholder="Ask me about products or routines…"
               autocomplete="off"
               required
             />
             <button type="submit" id="sendBtn">
               <span class="material-icons">send</span>
+              <span class="visually-hidden">Send</span>
             </button>
           </form>
         </section>
@@ -47,9 +49,12 @@
 
       <!-- Footer -->
       <footer class="site-footer">
-        <p>
-          &copy; 2025 L’Oréal Project by Fatoumata Bah. All rights reserved.
-        </p>
+        <p>&copy; 2025 Company Name. All rights reserved.</p>
+        <nav>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Contact</a>
+        </nav>
       </footer>
     </div>
 
