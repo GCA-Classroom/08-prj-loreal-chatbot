@@ -16,16 +16,11 @@ body {
   color: #333;
   display: flex;
   justify-content: center;
-  background: #e3a535; /* page background */
 }
 
 .page-wrapper {
   width: 90%;
   max-width: 900px;
-  background: #fff; /* keep content on a white card for readability */
-  padding: 28px;
-  border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 /* header */
