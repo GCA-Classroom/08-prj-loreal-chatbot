@@ -30,6 +30,15 @@ body {
   margin-bottom: 10px;
 }
 
+/* logo */
+.site-logo {
+  display: block;
+  margin: 0 auto 12px;
+  max-width: 260px;
+  width: 100%;
+  height: auto;
+}
+
 /* chat window */
 .chatbox {
   margin: 40px 0;
