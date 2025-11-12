@@ -6,11 +6,18 @@
 }
 
 /* —— body + fonts —— */
+/* NOTE: "Helvetica Now Display W05 Reg" and "Halesworth eText Bold" are commercial fonts.
+   Make sure to self-host the font files or load them via a licensed webfont provider.
+   These declarations assume the fonts are available on the system or via @font-face.
+*/
 body {
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  font-family: "Helvetica Now Display W05 Reg", "Helvetica Neue", Arial,
+    sans-serif;
   color: #333;
   display: flex;
   justify-content: center;
+  min-height: 100vh;
+  background: #e3a535;
 }
 
 .page-wrapper {
@@ -26,8 +33,31 @@ body {
 
 .site-title {
   font-size: 22px;
-  font-weight: 500;
+  /* Use Halesworth eText Bold for header/title. Provide a serif fallback. */
+  font-family: "Halesworth eText Bold", "Georgia", serif;
+  font-weight: 700;
   margin-bottom: 10px;
+  color: #ff003b; /* passionate red */
+}
+
+/* logo */
+.site-logo {
+  display: block;
+  margin: 0 auto 12px;
+  max-width: 260px;
+  width: 100%;
+  height: auto;
+}
+
+/* latest question shown above each assistant response */
+.latest-question {
+  margin: 8px 0 6px;
+  padding: 10px 12px;
+  background: #fff;
+  border-left: 3px solid #000;
+  color: #111;
+  font-style: italic;
+  font-size: 15px;
 }
 
 /* chat window */
@@ -44,20 +74,45 @@ body {
   overflow-y: auto;
   background: #fafafa;
   white-space: pre-line;
+  /* make chat window a vertical stack of messages */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* messages */
 .msg {
-  margin-bottom: 14px;
-  line-height: 1.5;
+  margin-bottom: 0; /* spacing handled by chat-window gap */
+  line-height: 1.4;
+  max-width: 78%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  word-break: break-word;
 }
 
 .msg.user {
-  color: #000;
+  align-self: flex-end;
+  background: #000;
+  color: #fff;
+  border-radius: 16px 16px 4px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .msg.ai {
-  color: #666666;
+  align-self: flex-start;
+  background: #ffffff;
+  color: #333333;
+  border: 1px solid #e6e6e6;
+  border-radius: 16px 16px 16px 4px;
+}
+
+/* slightly different typographic sizing for assistant vs user */
+.msg.ai {
+  font-size: 16px;
+}
+.msg.user {
+  font-size: 16px;
 }
 
 /* input row */
@@ -72,6 +127,9 @@ body {
   padding: 12px;
   border: 1px solid #ccc;
   font-size: 18px;
+  /* Match the body font for inputs/search bars */
+  font-family: "Helvetica Now Display W05 Reg", "Helvetica Neue", Arial,
+    sans-serif;
 }
 
 .chat-form input:focus {
@@ -81,7 +139,7 @@ body {
 
 .chat-form button {
   font-size: 18px;
-  background: #000;
+  background: #ff003b;
   color: #fff;
   border: none;
   padding: 12px;
@@ -99,7 +157,8 @@ body {
 }
 
 .chat-form button:hover {
-  background: #666666;
+  /* slightly darker on hover */
+  background: #cc0032;
 }
 
 .chat-form button:focus {
