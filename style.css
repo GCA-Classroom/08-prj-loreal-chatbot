@@ -16,6 +16,8 @@ body {
   color: #333;
   display: flex;
   justify-content: center;
+  min-height: 100vh;
+  background: #E3A535;
 }
 
 .page-wrapper {
