@@ -20,7 +20,8 @@ Use emojis when appropriate to make responses more engaging and friendly (e.g., 
 
 // Set initial message
 const welcomeMsg = document.createElement("div");
-welcomeMsg.textContent = "👋 Hello! I'm your L'Oréal beauty advisor. Ask me about products, routines, or recommendations!";
+welcomeMsg.textContent =
+  "👋 Hello! I'm your L'Oréal beauty advisor. Ask me about products, routines, or recommendations!";
 welcomeMsg.style.padding = "20px";
 welcomeMsg.style.marginBottom = "10px";
 chatWindow.appendChild(welcomeMsg);

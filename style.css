@@ -79,7 +79,7 @@ body {
 
 .msg.user::after {
   content: attr(data-content);
-  background: #FF6900; /* L'Oréal orange */
+  background: #ff6900; /* L'Oréal orange */
   color: #fff;
   padding: 12px 16px;
   border-radius: 18px 18px 4px 18px;
