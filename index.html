@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,7 +9,7 @@
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:wght@500;700&family=Source+Sans+3:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
@@ -19,7 +19,8 @@
     <div class="page-wrapper">
       <!------- Header / Branding ------->
       <header class="site-header">
-        <h1 class="site-title">Smart Product Advisor</h1>
+        <img src="img/loreal-logo.png" alt="L'Oreal logo" class="brand-logo" />
+        <h1 class="site-title">L'Oreal Smart Product Advisor</h1>
       </header>
 
       <!------- Chat Area ------->
@@ -28,6 +29,12 @@
           <div id="chatWindow" class="chat-window">
             <!-- messages will be appended here via JS -->
           </div>
+
+          <div
+            id="latestQuestionText"
+            class="latest-question-bubble"
+            aria-live="polite"
+          ></div>
 
           <form id="chatForm" class="chat-form">
             <label for="userInput" class="visually-hidden">Message</label>
