@@ -1,25 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat Assistant</title>
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>L'Oreal Beauty Advisor</title>
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <script>
+      // Cache-bust local files so the latest committed styles/scripts are shown.
+      window.APP_ASSET_VERSION = Date.now().toString();
+    </script>
+    <script>
+      const styleLink = document.createElement("link");
+      styleLink.rel = "stylesheet";
+      styleLink.href = `style.css?v=${window.APP_ASSET_VERSION}`;
+      document.head.appendChild(styleLink);
+    </script>
   </head>
 
   <body>
     <div class="page-wrapper">
       <!------- Header / Branding ------->
       <header class="site-header">
+        <img
+          src="img/loreal-logo.png"
+          alt="L'Oreal logo"
+          class="brand-logo"
+          id="brandLogo"
+        />
         <h1 class="site-title">Smart Product Advisor</h1>
+        <p class="site-subtitle">
+          Personalized beauty guidance for skincare, makeup, and haircare.
+        </p>
       </header>
 
       <!------- Chat Area ------->
@@ -45,6 +69,24 @@
             </button>
           </form>
         </section>
+
+        <section class="case-study" aria-labelledby="caseStudyHeading">
+          <h2 id="caseStudyHeading">
+            Typography Case Study: Monotype x L'Oreal
+          </h2>
+          <p>
+            Monotype's work with global beauty brands demonstrates how premium
+            typography creates a luxury tone while staying readable across
+            digital and in-store touchpoints.
+          </p>
+          <a
+            href="https://www.monotype.com/resources/case-studies"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Review Monotype case studies
+          </a>
+        </section>
       </main>
 
       <!------- Footer Links ------->
@@ -59,8 +101,18 @@
       </footer>
     </div>
 
-    <!-- secrets.js can be removed when using Cloudflare Workers for API requests -->
-    <script src="secrets.js"></script>
-    <script src="script.js"></script>
+    <script>
+      const brandLogo = document.getElementById("brandLogo");
+      brandLogo.src = `img/loreal-logo.png?v=${window.APP_ASSET_VERSION}`;
+
+      const secretsScript = document.createElement("script");
+      secretsScript.src = `secrets.js?v=${window.APP_ASSET_VERSION}`;
+      secretsScript.onload = () => {
+        const appScript = document.createElement("script");
+        appScript.src = `script.js?v=${window.APP_ASSET_VERSION}`;
+        document.body.appendChild(appScript);
+      };
+      document.body.appendChild(secretsScript);
+    </script>
   </body>
 </html>

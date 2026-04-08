@@ -5,12 +5,25 @@
   padding: 0;
 }
 
+:root {
+  --brand-black: #111111;
+  --brand-charcoal: #2a2a2a;
+  --brand-gold: #bea36a;
+  --brand-gold-soft: #e3d3ae;
+  --brand-cream: #fbf8f1;
+  --brand-white: #ffffff;
+}
+
 /* —— body + fonts —— */
 body {
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  color: #333;
+  font-family: "Source Sans 3", Arial, Helvetica, sans-serif;
+  color: var(--brand-charcoal);
   display: flex;
   justify-content: center;
+  background:
+    radial-gradient(circle at top right, #f3ecd8 0%, transparent 42%),
+    radial-gradient(circle at bottom left, #f8f3e6 0%, transparent 40%),
+    var(--brand-cream);
 }
 
 .page-wrapper {
@@ -21,13 +34,28 @@ body {
 /* header */
 .site-header {
   text-align: center;
-  padding-top: 50px;
+  padding-top: 42px;
+}
+
+.brand-logo {
+  width: 200px;
+  max-width: 70vw;
+  height: auto;
+  margin-bottom: 18px;
 }
 
 .site-title {
-  font-size: 22px;
-  font-weight: 500;
-  margin-bottom: 10px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--brand-black);
+  margin-bottom: 8px;
+}
+
+.site-subtitle {
+  font-size: 18px;
+  color: #4d4d4d;
 }
 
 /* chat window */
@@ -37,13 +65,15 @@ body {
 
 .chat-window {
   height: 360px;
-  border: 1px solid #000;
+  border: 1px solid var(--brand-gold);
+  border-radius: 12px;
   padding: 20px;
   font-size: 18px;
   line-height: 1.5;
   overflow-y: auto;
-  background: #fafafa;
+  background: var(--brand-white);
   white-space: pre-line;
+  box-shadow: 0 10px 30px rgba(17, 17, 17, 0.08);
 }
 
 /* messages */
@@ -53,11 +83,11 @@ body {
 }
 
 .msg.user {
-  color: #000;
+  color: var(--brand-black);
 }
 
 .msg.ai {
-  color: #666666;
+  color: #595959;
 }
 
 /* input row */
@@ -70,28 +100,33 @@ body {
 .chat-form input {
   flex: 1;
   padding: 12px;
-  border: 1px solid #ccc;
+  border: 1px solid #d1c4a7;
+  border-radius: 10px;
   font-size: 18px;
+  background: var(--brand-white);
 }
 
 .chat-form input:focus {
-  outline: 2px solid #000;
+  outline: 2px solid var(--brand-gold);
   outline-offset: 2px;
 }
 
 .chat-form button {
   font-size: 18px;
-  background: #000;
-  color: #fff;
+  background: var(--brand-black);
+  color: var(--brand-white);
   border: none;
   padding: 12px;
   width: 48px;
   height: 48px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.3s;
+  transition:
+    background 0.3s,
+    transform 0.2s;
 }
 
 .chat-form button .material-icons {
@@ -99,12 +134,45 @@ body {
 }
 
 .chat-form button:hover {
-  background: #666666;
+  background: var(--brand-gold);
+  transform: translateY(-1px);
 }
 
 .chat-form button:focus {
-  outline: 2px solid #000;
+  outline: 2px solid var(--brand-gold);
   outline-offset: 2px;
+}
+
+.case-study {
+  margin-top: 28px;
+  padding: 20px;
+  border-left: 4px solid var(--brand-gold);
+  background: linear-gradient(135deg, var(--brand-white), #f8f4ea);
+  border-radius: 10px;
+}
+
+.case-study h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 25px;
+  color: var(--brand-black);
+  margin-bottom: 10px;
+}
+
+.case-study p {
+  font-size: 17px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.case-study a {
+  color: var(--brand-black);
+  text-decoration-color: var(--brand-gold);
+  text-underline-offset: 3px;
+  font-weight: 600;
+}
+
+.case-study a:hover {
+  color: #7a6532;
 }
 
 /* visually hidden */
@@ -125,7 +193,7 @@ body {
   margin: 60px 0 40px;
   text-align: center;
   font-size: 14px;
-  color: #666;
+  color: #6a6a6a;
 }
 
 .site-footer nav {
@@ -134,10 +202,33 @@ body {
 
 .site-footer a {
   margin: 0 8px;
-  color: #000;
+  color: var(--brand-black);
   text-decoration: none;
 }
 
 .site-footer a:hover {
-  color: #666666;
+  color: #7a6532;
+}
+
+@media (max-width: 768px) {
+  .site-title {
+    font-size: 28px;
+  }
+
+  .site-subtitle {
+    font-size: 16px;
+  }
+
+  .chat-window {
+    height: 320px;
+    font-size: 16px;
+  }
+
+  .chat-form input {
+    font-size: 16px;
+  }
+
+  .case-study h2 {
+    font-size: 22px;
+  }
 }
