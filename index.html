@@ -1,51 +1,62 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>L’Oréal Beauty Assistant</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>L’Oréal Beauty Assistant</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="page-wrapper">
-    <header class="site-header">
-      <img src="img/loreal-logo.png" alt="L'Oréal logo" class="logo" />
-      <h1 class="site-title">L’Oréal Beauty Assistant</h1>
-      <p class="site-subtitle">
-        Discover products, routines, and personalized beauty guidance.
-      </p>
-    </header>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <header class="site-header">
+        <img src="img/loreal-logo.png" alt="L'Oréal logo" class="logo" />
+        <h1 class="site-title">L’Oréal Beauty Assistant</h1>
+        <p class="site-subtitle">
+          Discover products, routines, and personalized beauty guidance.
+        </p>
+      </header>
 
-    <main class="chatbox">
-      <div id="latestQuestion" class="latest-question">
-        Latest question: None yet
-      </div>
+      <main class="chatbox">
+        <div id="latestQuestion" class="latest-question">
+          Latest question: None yet
+        </div>
 
-      <section id="chatWindow" class="chat-window" aria-live="polite"></section>
+        <section
+          id="chatWindow"
+          class="chat-window"
+          aria-live="polite"
+        ></section>
 
-      <form id="chatForm" class="chat-form">
-        <label for="userInput" class="visually-hidden">Ask your beauty question</label>
-        <input
-          id="userInput"
-          type="text"
-          placeholder="Ask about skincare, makeup, haircare, or fragrance..."
-          autocomplete="off"
-          required
-        />
-        <button type="submit">➜</button>
-      </form>
-    </main>
+        <form id="chatForm" class="chat-form">
+          <label for="userInput" class="visually-hidden"
+            >Ask your beauty question</label
+          >
+          <input
+            id="userInput"
+            type="text"
+            placeholder="Ask about skincare, makeup, haircare, or fragrance..."
+            autocomplete="off"
+            required
+          />
+          <button type="submit">➜</button>
+        </form>
+      </main>
 
-    <footer class="site-footer">
-      <p>AI chatbot concept for L’Oréal product discovery and beauty routines.</p>
-    </footer>
-  </div>
+      <footer class="site-footer">
+        <p>
+          AI chatbot concept for L’Oréal product discovery and beauty routines.
+        </p>
+      </footer>
+    </div>
 
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
