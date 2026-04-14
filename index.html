@@ -1,66 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat Assistant</title>
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>L’Oréal Beauty Assistant</title>
 
-  <body>
-    <div class="page-wrapper">
-      <!------- Header / Branding ------->
-      <header class="site-header">
-        <h1 class="site-title">Smart Product Advisor</h1>
-      </header>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-      <!------- Chat Area ------->
-      <main>
-        <section class="chatbox">
-          <div id="chatWindow" class="chat-window">
-            <!-- messages will be appended here via JS -->
-          </div>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page-wrapper">
+    <header class="site-header">
+      <img src="img/loreal-logo.png" alt="L'Oréal logo" class="logo" />
+      <h1 class="site-title">L’Oréal Beauty Assistant</h1>
+      <p class="site-subtitle">
+        Discover products, routines, and personalized beauty guidance.
+      </p>
+    </header>
 
-          <form id="chatForm" class="chat-form">
-            <label for="userInput" class="visually-hidden">Message</label>
-            <input
-              id="userInput"
-              name="userInput"
-              type="text"
-              placeholder="Ask me about products or routines…"
-              autocomplete="off"
-              required
-            />
-            <button type="submit" id="sendBtn">
-              <span class="material-icons">send</span>
-              <span class="visually-hidden">Send</span>
-            </button>
-          </form>
-        </section>
-      </main>
+    <main class="chatbox">
+      <div id="latestQuestion" class="latest-question">
+        Latest question: None yet
+      </div>
 
-      <!------- Footer Links ------->
-      <footer class="site-footer">
-        <p>&copy; 2025 Company Name. All rights reserved.</p>
-        <nav>
-          <!-- These URLs are placeholders -->
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Use</a>
-          <a href="#">Contact</a>
-        </nav>
-      </footer>
-    </div>
+      <section id="chatWindow" class="chat-window" aria-live="polite"></section>
 
-    <!-- secrets.js can be removed when using Cloudflare Workers for API requests -->
-    <script src="secrets.js"></script>
-    <script src="script.js"></script>
-  </body>
+      <form id="chatForm" class="chat-form">
+        <label for="userInput" class="visually-hidden">Ask your beauty question</label>
+        <input
+          id="userInput"
+          type="text"
+          placeholder="Ask about skincare, makeup, haircare, or fragrance..."
+          autocomplete="off"
+          required
+        />
+        <button type="submit">➜</button>
+      </form>
+    </main>
+
+    <footer class="site-footer">
+      <p>AI chatbot concept for L’Oréal product discovery and beauty routines.</p>
+      <nav>
+        <a href="#">About</a>
+        <a href="#">Privacy</a>
+        <a href="#">Contact</a>
+      </nav>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
 </html>

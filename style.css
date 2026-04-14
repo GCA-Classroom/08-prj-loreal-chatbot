@@ -1,66 +1,121 @@
-/* —— basic reset —— */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* —— body + fonts —— */
+:root {
+  --black: #000000;
+  --white: #ffffff;
+  --cream: #f5f1eb;
+  --soft-gray: #e5dfd6;
+  --text-gray: #666666;
+
+  /* Brand accents */
+  --gold: #D4AF37;
+  --red: #E50914; /* optional accent */
+}
+
 body {
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
-  color: #333;
-  display: flex;
-  justify-content: center;
+  font-family: 'Inter', sans-serif;
 }
 
 .page-wrapper {
-  width: 90%;
-  max-width: 900px;
+  width: 100%;
+  max-width: 920px;
 }
 
-/* header */
 .site-header {
   text-align: center;
-  padding-top: 50px;
+  padding: 40px 20px 20px;
+}
+
+.logo {
+  width: 190px;
+  max-width: 70%;
+  margin-bottom: 18px;
 }
 
 .site-title {
-  font-size: 22px;
-  font-weight: 500;
-  margin-bottom: 10px;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  margin-bottom: 8px;
 }
 
-/* chat window */
+.site-subtitle {
+  color: var(--text-gray);
+  font-size: 1rem;
+}
+
 .chatbox {
-  margin: 40px 0;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid var(--soft-gray);
+  border-radius: 24px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  margin: 20px 0 32px;
+}
+
+.latest-question {
+  font-size: 0.92rem;
+  color: var(--text-gray);
+  margin-bottom: 12px;
+  padding: 0 4px;
 }
 
 .chat-window {
-  height: 360px;
-  border: 1px solid #000;
-  padding: 20px;
-  font-size: 18px;
-  line-height: 1.5;
+  height: 500px;
   overflow-y: auto;
-  background: #fafafa;
-  white-space: pre-line;
+  background: var(--cream);
+  border: 1px solid var(--soft-gray);
+  border-radius: 18px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-/* messages */
+.message-row {
+  display: flex;
+}
+
+.message-row.user {
+  justify-content: flex-end;
+}
+
+.message-row.ai {
+  justify-content: flex-start;
+}
+
 .msg {
-  margin-bottom: 14px;
-  line-height: 1.5;
+  max-width: 78%;
+  padding: 13px 16px;
+  border-radius: 18px;
+  line-height: 1.55;
+  font-size: 0.98rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .msg.user {
-  color: #000;
+  background: var(--black);
+  color: var(--white);
 }
 
 .msg.ai {
-  color: #666666;
+  background: var(--white);
+  color: var(--charcoal);
+  border: 1px solid var(--soft-gray);
+  border-bottom-left-radius: 6px;
 }
 
-/* input row */
+.msg.typing {
+  font-style: italic;
+  color: var(--text-gray);
+}
+
 .chat-form {
   display: flex;
   gap: 12px;
@@ -69,75 +124,90 @@ body {
 
 .chat-form input {
   flex: 1;
-  padding: 12px;
-  border: 1px solid #ccc;
-  font-size: 18px;
+  padding: 14px 16px;
+  border: 1px solid #d0cbc4;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fff;
 }
 
 .chat-form input:focus {
-  outline: 2px solid #000;
-  outline-offset: 2px;
+  outline: 2px solid var(--gold);
 }
 
 .chat-form button {
-  font-size: 18px;
-  background: #000;
-  color: #fff;
+  width: 56px;
+  height: 56px;
   border: none;
-  padding: 12px;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 14px;
+  background: var(--black);
+  color: var(--white);
   cursor: pointer;
-  transition: background 0.3s;
-}
-
-.chat-form button .material-icons {
-  font-size: 24px;
+  font-size: 1.15rem;
+  transition: 0.25s ease;
 }
 
 .chat-form button:hover {
-  background: #666666;
+  background: var(--gold);
+  color: var(--black);
 }
 
 .chat-form button:focus {
-  outline: 2px solid #000;
+  outline: 2px solid var(--gold);
   outline-offset: 2px;
 }
 
-/* visually hidden */
 .visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;
-  padding: 0;
   margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
   border: 0;
 }
 
-/* footer */
 .site-footer {
-  margin: 60px 0 40px;
+  margin: 20px 0 32px;
   text-align: center;
-  font-size: 14px;
-  color: #666;
+  color: var(--text-gray);
+  font-size: 0.9rem;
 }
 
 .site-footer nav {
-  margin-top: 12px;
+  margin-top: 10px;
 }
 
 .site-footer a {
-  margin: 0 8px;
-  color: #000;
+  color: var(--black);
+  margin: 0 10px;
   text-decoration: none;
 }
 
 .site-footer a:hover {
-  color: #666666;
+  color: var(--gold);
+}
+
+@media (max-width: 640px) {
+  body {
+    padding: 16px;
+  }
+
+  .site-title {
+  font-family: 'Playfair Display', serif;
+}
+
+  .chat-window {
+    height: 420px;
+  }
+
+  .msg {
+    max-width: 88%;
+  }
+
+  .chat-form button {
+    width: 52px;
+    height: 52px;
+  }
 }
