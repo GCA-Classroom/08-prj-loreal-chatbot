@@ -10,7 +10,7 @@ const messages = [
   {
     role: "system",
     content:
-      "You are a helpful L’Oréal beauty assistant. Only answer questions related to L’Oréal products, skincare, makeup, haircare, fragrance, beauty routines, recommendations, and beauty-related topics. If the user asks about something unrelated, politely refuse and explain that you only assist with L’Oréal and beauty topics. Keep responses helpful, elegant, and concise."
+      "You are a helpful L’Oréal beauty assistant. Only answer questions related to L’Oréal products, skincare, makeup, haircare, fragrance, beauty routines, recommendations, and beauty-related topics. If the user asks about something unrelated, politely refuse and explain that you only assist with L’Oréal and beauty topics. Keep responses helpful and concise."
   }
 ];
 
@@ -57,7 +57,7 @@ chatForm.addEventListener("submit", async (event) => {
         data?.details?.error?.message ||
         data?.details ||
         data?.error ||
-        "Sorry, there was a problem connecting to the chatbot.";
+        "There was a problem connecting to the chatbot.";
 
       addMessage("ai", `Sorry, something went wrong: ${errorMessage}`);
       console.error("Worker/API error:", data);
@@ -93,11 +93,22 @@ function addMessage(role, text) {
 
   const bubble = document.createElement("div");
   bubble.className = `msg ${role}`;
-  bubble.innerHTML = text.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
+
+  if (role === "ai") {
+    bubble.innerHTML = formatMessage(text);
+  } else {
+    bubble.textContent = text;
+  }
 
   row.appendChild(bubble);
   chatWindow.appendChild(row);
   scrollToBottom();
+}
+
+function formatMessage(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\n/g, "<br>");
 }
 
 function showTyping() {
