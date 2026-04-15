@@ -1,0 +1,5 @@
+{
+  "name": "loreal-chatbot-worker",
+  "main": "RESOURCE_cloudflare-worker.js",
+  "compatibility_date": "2026-04-15"
+}
