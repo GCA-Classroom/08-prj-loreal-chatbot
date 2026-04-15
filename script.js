@@ -4,6 +4,15 @@ const chatWindow = document.getElementById("chatWindow");
 const chatForm = document.getElementById("chatForm");
 const userInput = document.getElementById("userInput");
 
+/* 🧠 Conversation memory */
+let conversation = [
+  {
+    role: "system",
+    content: "You are a helpful L'Oréal Beauty Assistant."
+  }
+];
+
+/* —— formatting —— */
 function formatMessage(text) {
   return text
     .replace(/&/g, "&amp;")
@@ -17,15 +26,13 @@ function formatMessage(text) {
     .replace(/\n/g, "<br>");
 }
 
+/* —— UI message creation —— */
 function createMessage(text, sender) {
   const wrapper = document.createElement("div");
   wrapper.classList.add("message");
 
-  if (sender === "user") {
-    wrapper.classList.add("user-message");
-  } else {
-    wrapper.classList.add("bot-message");
-  }
+  if (sender === "user") wrapper.classList.add("user-message");
+  else wrapper.classList.add("bot-message");
 
   const label = document.createElement("div");
   label.classList.add("message-label");
@@ -47,6 +54,7 @@ function addMessage(text, sender) {
   chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
+/* —— typing indicator —— */
 function addTyping() {
   const typing = document.createElement("div");
   typing.id = "typing";
@@ -63,7 +71,6 @@ function addTyping() {
   typing.appendChild(label);
   typing.appendChild(bubble);
   chatWindow.appendChild(typing);
-  chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
 function removeTyping() {
@@ -71,16 +78,25 @@ function removeTyping() {
   if (typing) typing.remove();
 }
 
+/* —— send message —— */
 async function sendMessage(message) {
   addTyping();
 
   try {
+    // 🧠 add user message to memory
+    conversation.push({
+      role: "user",
+      content: message
+    });
+
     const response = await fetch(WORKER_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ message })
+      body: JSON.stringify({
+        messages: conversation   // 🔥 SEND FULL HISTORY
+      })
     });
 
     const data = await response.json();
@@ -88,21 +104,26 @@ async function sendMessage(message) {
 
     const reply =
       data.choices?.[0]?.message?.content ||
-      data.response ||
-      data.reply ||
-      data.error ||
       "Sorry, I couldn’t generate a response.";
 
+    // 🧠 store AI reply
+    conversation.push({
+      role: "assistant",
+      content: reply
+    });
+
     addMessage(reply, "bot");
+
   } catch (error) {
     removeTyping();
-    console.error("Chatbot error:", error);
-    addMessage("Sorry, there was an error connecting to the assistant.", "bot");
+    console.error(error);
+    addMessage("Error connecting to assistant.", "bot");
   }
 }
 
-chatForm.addEventListener("submit", function (event) {
-  event.preventDefault();
+/* —— form submit —— */
+chatForm.addEventListener("submit", function (e) {
+  e.preventDefault();
 
   const message = userInput.value.trim();
   if (!message) return;
@@ -113,9 +134,16 @@ chatForm.addEventListener("submit", function (event) {
   sendMessage(message);
 });
 
+/* —— initial greeting —— */
 window.addEventListener("DOMContentLoaded", () => {
-  addMessage(
-    "Hi! I’m your L'Oréal Beauty Assistant. Ask me about skincare, haircare, makeup, fragrance, or routines.",
-    "bot"
-  );
+  const greeting =
+    "Hi! I’m your L'Oréal Beauty Assistant. Ask me about skincare, haircare, makeup, fragrance, or routines.";
+
+  addMessage(greeting, "bot");
+
+  // store greeting in memory
+  conversation.push({
+    role: "assistant",
+    content: greeting
+  });
 });

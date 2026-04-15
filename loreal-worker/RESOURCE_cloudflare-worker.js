@@ -24,11 +24,11 @@ export default {
     }
 
     try {
-      const { message } = await request.json();
+      const { messages } = await request.json();
 
-      if (!message || !message.trim()) {
+      if (!messages || !Array.isArray(messages) || messages.length === 0) {
         return new Response(
-          JSON.stringify({ error: "Message is required." }),
+          JSON.stringify({ error: "Messages array is required." }),
           {
             status: 400,
             headers: {
@@ -66,16 +66,20 @@ Guidelines:
 - Do not claim medical expertise or guarantee results.
 - If a user asks very broad questions, suggest a few strong options and a routine.
 - Favor premium, brand-appropriate wording without sounding overly salesy.
+- Politely refuse questions unrelated to L'Oréal, beauty, skincare, haircare, makeup, fragrance, or product recommendations.
 
 Formatting:
 - Use short sections with headings when helpful.
 - Use bullet points for routines or product lists.
 - Keep paragraphs short and readable.`
             },
-            {
-              role: "user",
-              content: message
-            }
+            ...messages.filter(
+              (msg) =>
+                msg &&
+                typeof msg === "object" &&
+                ["user", "assistant", "system"].includes(msg.role) &&
+                typeof msg.content === "string"
+            )
           ]
         })
       });
