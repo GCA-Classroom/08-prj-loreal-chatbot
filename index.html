@@ -1,66 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat Assistant</title>
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
-      rel="stylesheet"
-    />
+    <title>L'ORÉAL — Routine Builder &amp; Beauty Advisor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Nunito+Sans:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <div class="page-wrapper">
-      <!------- Header / Branding ------->
-      <header class="site-header">
-        <h1 class="site-title">Smart Product Advisor</h1>
-      </header>
-
-      <!------- Chat Area ------->
-      <main>
-        <section class="chatbox">
-          <div id="chatWindow" class="chat-window">
-            <!-- messages will be appended here via JS -->
+    <!-- ── Header ─────────────────────────────────────────── -->
+    <header>
+      <div class="header-inner">
+        <div class="header-brand">
+          <img src="img/loreal-logo.png" alt="L'Oréal" class="logo" onerror="this.style.display='none'" />
+          <div class="header-text">
+            <h1>L'OR&Eacute;AL</h1>
+            <p class="tagline">Routine Builder &amp; Beauty Advisor</p>
           </div>
+        </div>
+        <div class="header-controls">
+          <button id="web-search-toggle" class="header-btn" title="Enable real-time web search" aria-pressed="false">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Web Search
+          </button>
+          <button id="rtl-toggle" class="header-btn" title="Toggle right-to-left layout" aria-pressed="false">
+            ⇄ RTL
+          </button>
+        </div>
+      </div>
+    </header>
 
-          <form id="chatForm" class="chat-form">
-            <label for="userInput" class="visually-hidden">Message</label>
-            <input
-              id="userInput"
-              name="userInput"
-              type="text"
-              placeholder="Ask me about products or routines…"
-              autocomplete="off"
-              required
-            />
-            <button type="submit" id="sendBtn">
-              <span class="material-icons">send</span>
-              <span class="visually-hidden">Send</span>
-            </button>
-          </form>
+    <!-- ── Main scrollable area ───────────────────────────── -->
+    <main id="main-scroll">
+      <div class="app-container">
+
+        <!-- ── Product Discovery ───────────────────────────── -->
+        <section class="section product-section" aria-label="Product Discovery">
+          <div class="section-header">
+            <h2 class="section-title">Discover Products</h2>
+            <div class="search-filter-row">
+              <div class="search-wrapper">
+                <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="search" id="product-search" class="search-input" placeholder="Search products by name or keyword…" autocomplete="off" aria-label="Search products" />
+              </div>
+              <div class="category-filters" role="group" aria-label="Filter by category">
+                <button class="filter-btn active" data-category="All">All</button>
+                <button class="filter-btn" data-category="Skincare">Skincare</button>
+                <button class="filter-btn" data-category="Makeup">Makeup</button>
+                <button class="filter-btn" data-category="Haircare">Haircare</button>
+                <button class="filter-btn" data-category="Men's">Men's</button>
+              </div>
+            </div>
+          </div>
+          <div class="product-grid" id="product-grid" role="list" aria-label="Product catalogue"></div>
+          <p class="no-results hidden" id="no-results">No products match your search. Try a different keyword or category.</p>
         </section>
-      </main>
 
-      <!------- Footer Links ------->
-      <footer class="site-footer">
-        <p>&copy; 2025 Company Name. All rights reserved.</p>
-        <nav>
-          <!-- These URLs are placeholders -->
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Use</a>
-          <a href="#">Contact</a>
-        </nav>
-      </footer>
+        <!-- ── Selected Products ──────────────────────────── -->
+        <section class="section selected-section" aria-label="Selected Products">
+          <div class="selected-header">
+            <h2 class="section-title">
+              Selected Products
+              <span class="count-badge" id="selected-count">0</span>
+            </h2>
+            <button class="text-btn" id="clear-all-btn" aria-label="Clear all selected products">Clear All</button>
+          </div>
+          <div id="selected-list" class="selected-list" role="list" aria-label="Your selected products">
+            <p class="empty-hint" id="empty-hint">Click any product card above to add it to your routine.</p>
+          </div>
+          <button class="generate-btn" id="generate-routine-btn" disabled aria-label="Generate personalised routine from selected products">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+            Generate My Routine
+          </button>
+        </section>
+
+        <!-- ── Chat Section ───────────────────────────────── -->
+        <section class="section chat-section" aria-label="Beauty Advisor Chat">
+          <h2 class="section-title">Beauty Advisor Chat</h2>
+          <div class="chat-window" id="chat-window" role="log" aria-live="polite" aria-label="Chat messages"></div>
+          <div class="typing-indicator hidden" id="typing-indicator" aria-hidden="true">
+            <div class="avatar assistant-avatar">L</div>
+            <div class="bubble assistant-bubble typing-bubble">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- ── Input bar ──────────────────────────────────────── -->
+    <div class="input-bar">
+      <div class="input-inner">
+        <input type="text" id="user-input" placeholder="Ask about skincare, haircare, makeup, or your routine…" autocomplete="off" aria-label="Your message" />
+        <button id="send-btn" aria-label="Send message">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
     </div>
 
-    <!-- secrets.js can be removed when using Cloudflare Workers for API requests -->
-    <script src="secrets.js"></script>
+    <!-- ── Product Description Modal ─────────────────────── -->
+    <div class="modal-overlay hidden" id="product-modal" role="dialog" aria-modal="true" aria-labelledby="modal-product-name">
+      <div class="modal" id="modal-panel">
+        <button class="modal-close" id="modal-close" aria-label="Close product details">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <div id="modal-content"></div>
+      </div>
+    </div>
+
+    <!-- ── Footer ─────────────────────────────────────────── -->
+    <footer>
+      <p>&copy; 2025 L'Or&eacute;al. All rights reserved.</p>
+      <nav>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Contact</a>
+      </nav>
+    </footer>
+
+    <script src="products.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
