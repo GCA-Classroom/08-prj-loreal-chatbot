@@ -24,7 +24,9 @@ When answering questions:
 For questions unrelated to L'Oréal products, routines, or beauty recommendations, politely decline to answer and redirect the conversation back to beauty and L'Oréal products. Say something like: "I'm here to help with L'Oréal products and beauty routines. How can I assist you with your beauty needs?"`;
 
 // Cloudflare Worker endpoint URL - Update this with your deployed worker URL
-const CLOUDFLARE_WORKER_URL = "https://your-cloudflare-worker-url.workers.dev";
+// Example: const CLOUDFLARE_WORKER_URL = "https://loreal-beauty-advisor.workers.dev";
+// See CLOUDFLARE_QUICK_SETUP.md for deployment instructions
+const CLOUDFLARE_WORKER_URL = "https://your-cloudflare-worker-name.workers.dev";
 
 /* Chat History - Maintains conversation context for multi-turn interactions */
 let chatHistory = [
@@ -103,7 +105,11 @@ async function sendMessageToAI(userMessage) {
   } catch (error) {
     console.error("Error communicating with API:", error);
     displayMessage(
-      "❌ I encountered an error connecting to the beauty database. Please try again shortly or check your Cloudflare Worker configuration. Make sure CLOUDFLARE_WORKER_URL is set correctly in script.js and your worker has the OPENAI_API_KEY secret configured.",
+      "❌ Issue connecting to the beauty database. Please:\n\n" +
+        "1. Check that CLOUDFLARE_WORKER_URL in script.js is set correctly\n" +
+        "2. Verify your Cloudflare Worker is deployed\n" +
+        "3. Confirm OPENAI_API_KEY secret is set in Cloudflare\n\n" +
+        "📖 See CLOUDFLARE_QUICK_SETUP.md for full deployment instructions",
       "ai",
     );
   }
@@ -134,3 +140,4 @@ chatForm.addEventListener("submit", async (e) => {
 
 /* Initialize chat on page load */
 window.addEventListener("DOMContentLoaded", initializeChat);
+
