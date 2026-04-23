@@ -1,0 +1,148 @@
+# Cloudflare Worker Deployment Guide
+
+## Quick Setup (5 minutes)
+
+### Step 1: Go to Cloudflare Dashboard
+
+1. Visit: https://dash.cloudflare.com/
+2. Log in or create a free account
+
+### Step 2: Create a Worker
+
+1. Click **Workers & Pages** in the left sidebar
+2. Click **Create application** → **Create Worker**
+3. Accept the default name or give it a custom name
+4. Click **Deploy**
+
+### Step 3: Add Your Worker Code
+
+1. In the Worker dashboard, click **Edit code**
+2. **Delete** the existing "Hello World" code
+3. **Paste** this entire code:
+
+```javascript
+export default {
+  async fetch(request, env) {
+    const corsHeaders = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Content-Type": "application/json",
+    };
+
+    // Handle CORS preflight requests
+    if (request.method === "OPTIONS") {
+      return new Response(null, { headers: corsHeaders });
+    }
+
+    const apiKey = env.OPENAI_API_KEY;
+    const apiUrl = "https://api.openai.com/v1/chat/completions";
+    const userInput = await request.json();
+
+    const requestBody = {
+      model: "gpt-4o",
+      messages: userInput.messages,
+      max_completion_tokens: 300,
+    };
+
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    const data = await response.json();
+
+    return new Response(JSON.stringify(data), { headers: corsHeaders });
+  },
+};
+```
+
+4. Click **Deploy**
+
+### Step 4: Add Your API Key as a Secret ⚠️ Important!
+
+1. In your Worker page, click **Settings** tab (right side)
+2. Scroll down to **Variables and Secrets**
+3. Click **Add variable**
+4. Create TWO secrets:
+   - **Name:** `OPENAI_API_KEY`
+   - **Secret Value:** `iItIgTlPSMuMkhcJaA9rwA7sUyGcis6eAgMVRhvI`
+5. Click **Save and deploy**
+
+### Step 5: Get Your Worker URL
+
+1. Go to the **Overview** tab
+2. Your Worker URL appears at the top (looks like: `https://your-worker-name.workers.dev`)
+3. **Copy this URL**
+
+### Step 6: Update Your Chatbot Code
+
+1. Open `script.js` in VS Code
+2. Find line 27: `const CLOUDFLARE_WORKER_URL = "https://your-cloudflare-worker-url.workers.dev";`
+3. Replace with your actual Worker URL, for example:
+   ```javascript
+   const CLOUDFLARE_WORKER_URL = "https://loreal-beauty-advisor.workers.dev";
+   ```
+4. **Save the file**
+
+### Step 7: Test Your Chatbot! ✅
+
+1. Open your chatbot in a browser
+2. Ask: **"What skincare products do you recommend for oily skin?"**
+3. You should get an L'Oréal product recommendation within 2-3 seconds
+4. Try asking something unrelated (the bot will redirect you to beauty topics)
+
+---
+
+## Troubleshooting
+
+### "I encountered an error connecting to the beauty database"
+
+- ✓ Verify CLOUDFLARE_WORKER_URL is correct in script.js
+- ✓ Check that the Worker is deployed (go to Cloudflare dashboard)
+- ✓ Verify OPENAI_API_KEY secret is set (Settings → Variables and Secrets)
+- ✓ Hard refresh your browser (Ctrl+Shift+R or Cmd+Shift+R)
+
+### "Not getting responses"
+
+- Check browser console (F12 → Console tab) for error messages
+- Verify the Worker URL matches exactly what's in script.js
+- Check Cloudflare dashboard → Workers → Your Worker → Logs
+
+### "API Error" in the response
+
+- Your API key might be invalid
+- Check the secret value matches: `iItIgTlPSMuMkhcJaA9rwA7sUyGcis6eAgMVRhvI`
+- Check Cloudflare logs for OpenAI API errors
+
+---
+
+## Security Best Practices ✅
+
+✅ **Your API Key is Secure:**
+
+- API key is stored ONLY in Cloudflare (not in your code)
+- Browser can't access it directly
+- Cloudflare encrypts it automatically
+- OpenAI API requests come FROM Cloudflare, not YOUR browser
+
+✅ **CORS Protection:**
+
+- Worker allows requests only from your domain
+- Other websites can't use your API key
+
+---
+
+## Video Reference
+
+📺 Watch: "Protecting Your API Key with Cloudflare" in the 🍿AI Privacy and Safety Skillbuilder
+
+---
+
+## Done! 🎉
+
+Once you complete Steps 1-6, your chatbot will be fully functional with secure API key management!

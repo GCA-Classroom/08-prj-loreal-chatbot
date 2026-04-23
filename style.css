@@ -5,12 +5,14 @@
   padding: 0;
 }
 
-/* —— body + fonts —— */
+/* —— body + fonts + L'Oréal Branding —— */
 body {
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
   color: #333;
   display: flex;
   justify-content: center;
+  min-height: 100vh;
 }
 
 .page-wrapper {
@@ -21,43 +23,110 @@ body {
 /* header */
 .site-header {
   text-align: center;
-  padding-top: 50px;
+  padding-top: 40px;
+  padding-bottom: 30px;
+  border-bottom: 3px solid #d4af37;
+  margin-bottom: 30px;
+}
+
+.site-logo {
+  max-width: 150px;
+  height: auto;
+  margin-bottom: 20px;
 }
 
 .site-title {
-  font-size: 22px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.site-tagline {
+  font-size: 14px;
+  color: #d4af37;
   font-weight: 500;
-  margin-bottom: 10px;
+  letter-spacing: 0.5px;
 }
 
 /* chat window */
 .chatbox {
-  margin: 40px 0;
+  margin: 30px 0;
 }
 
 .chat-window {
-  height: 360px;
-  border: 1px solid #000;
+  height: 400px;
+  border: 2px solid #000;
   padding: 20px;
-  font-size: 18px;
-  line-height: 1.5;
+  font-size: 16px;
+  line-height: 1.6;
   overflow-y: auto;
   background: #fafafa;
-  white-space: pre-line;
+  border-radius: 8px;
+  margin-bottom: 16px;
 }
 
-/* messages */
+/* Scrollbar styling */
+.chat-window::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-window::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.chat-window::-webkit-scrollbar-thumb {
+  background: #d4af37;
+  border-radius: 4px;
+}
+
+.chat-window::-webkit-scrollbar-thumb:hover {
+  background: #c49a27;
+}
+
+.user-question {
+  background: #f0f0f0;
+  border-left: 4px solid #d4af37;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  min-height: 20px;
+}
+
+/* messages with bubble styling */
 .msg {
-  margin-bottom: 14px;
+  margin-bottom: 16px;
+  display: flex;
   line-height: 1.5;
 }
 
 .msg.user {
-  color: #000;
+  justify-content: flex-end;
+}
+
+.msg.user .msg-bubble {
+  background: #000;
+  color: #fff;
+  border-radius: 12px 12px 4px 12px;
+  padding: 12px 16px;
+  max-width: 70%;
+  word-wrap: break-word;
 }
 
 .msg.ai {
-  color: #666666;
+  justify-content: flex-start;
+}
+
+.msg.ai .msg-bubble {
+  background: #d4af37;
+  color: #000;
+  border-radius: 12px 12px 12px 4px;
+  padding: 12px 16px;
+  max-width: 70%;
+  word-wrap: break-word;
 }
 
 /* input row */
@@ -69,29 +138,33 @@ body {
 
 .chat-form input {
   flex: 1;
-  padding: 12px;
-  border: 1px solid #ccc;
-  font-size: 18px;
+  padding: 14px;
+  border: 2px solid #000;
+  font-size: 16px;
+  border-radius: 4px;
+  font-family: "Montserrat", Arial, sans-serif;
 }
 
 .chat-form input:focus {
-  outline: 2px solid #000;
-  outline-offset: 2px;
+  outline: none;
+  border-color: #d4af37;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
 }
 
 .chat-form button {
   font-size: 18px;
   background: #000;
-  color: #fff;
-  border: none;
+  color: #d4af37;
+  border: 2px solid #000;
   padding: 12px;
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
+  border-radius: 4px;
 }
 
 .chat-form button .material-icons {
@@ -99,12 +172,13 @@ body {
 }
 
 .chat-form button:hover {
-  background: #666666;
+  background: #d4af37;
+  color: #000;
 }
 
 .chat-form button:focus {
-  outline: 2px solid #000;
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
 }
 
 /* visually hidden */
@@ -123,9 +197,17 @@ body {
 /* footer */
 .site-footer {
   margin: 60px 0 40px;
+  padding-top: 30px;
+  border-top: 3px solid #d4af37;
   text-align: center;
   font-size: 14px;
   color: #666;
+}
+
+.site-footer p {
+  margin-bottom: 12px;
+  color: #000;
+  font-weight: 500;
 }
 
 .site-footer nav {
@@ -133,11 +215,12 @@ body {
 }
 
 .site-footer a {
-  margin: 0 8px;
+  margin: 0 12px;
   color: #000;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .site-footer a:hover {
-  color: #666666;
+  color: #d4af37;
 }
