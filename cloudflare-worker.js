@@ -1,5 +1,3 @@
-// Copy this code into your Cloudflare Worker script
-
 export default {
   async fetch(request, env) {
     const corsHeaders = {
@@ -9,7 +7,6 @@ export default {
       "Content-Type": "application/json",
     };
 
-    // Handle CORS preflight requests
     if (request.method === "OPTIONS") {
       return new Response(null, { headers: corsHeaders });
     }
@@ -21,7 +18,7 @@ export default {
       );
     }
 
-    const apiKey = env.OPENAI_API_KEY; // Store this only in Cloudflare Workers Secrets as OPENAI_API_KEY.
+    const apiKey = env.OPENAI_API_KEY;
 
     if (!apiKey) {
       return new Response(
@@ -30,10 +27,9 @@ export default {
       );
     }
 
-    const apiUrl = "https://api.openai.com/v1/chat/completions";
-    const userInput = await request.json().catch(() => ({}));
+    const body = await request.json().catch(() => ({}));
 
-    if (!Array.isArray(userInput.messages) || userInput.messages.length === 0) {
+    if (!Array.isArray(body.messages) || body.messages.length === 0) {
       return new Response(
         JSON.stringify({
           error: "Request body must include a messages array.",
@@ -42,19 +38,17 @@ export default {
       );
     }
 
-    const requestBody = {
-      model: "gpt-4.1",
-      messages: userInput.messages,
-      max_tokens: 300,
-    };
-
-    const response = await fetch(apiUrl, {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(requestBody),
+      body: JSON.stringify({
+        model: "gpt-4.1",
+        messages: body.messages,
+        max_tokens: 300,
+      }),
     });
 
     const data = await response.json().catch(() => ({}));
