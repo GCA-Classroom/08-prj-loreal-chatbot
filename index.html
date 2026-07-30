@@ -4,45 +4,50 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SXWer AI Chat Bot by SXWers</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="riot-grrrl.css" />
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      /* Riot Grrrl Palette - Inlined for immediate loading */
+      :root {
+        --pink: #ff2d95;
+        --hot-pink: #ff4fb4;
+        --purple: #7d2cff;
+        --black: #111111;
+        --white: #ffffff;
+        --cream: #f7f5ef;
+        --gray: #8b8b8b;
+        --silver: #d6d6d6;
+        --gradient: linear-gradient(135deg, #ff2d95, #ff70d3, #7d2cff);
+        --shadow: 0 15px 40px rgba(0,0,0,.2);
+        --radius: 18px;
       }
 
       body {
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-          Cantarell, sans-serif;
-        background: linear-gradient(135deg, #01115b 0%, #0c0314 100%);
+        background: var(--gradient);
+        color: var(--black);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         min-height: 100vh;
+        margin: 0;
+        padding: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 20px;
       }
 
       .container {
-        width: 100%;
+        background: var(--cream);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
         max-width: 900px;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 20px 60px rgba(242, 64, 64, 0.3);
+        width: 100%;
+        height: 90vh;
         display: flex;
         flex-direction: column;
-        height: 90vh;
         overflow: hidden;
       }
 
       .header {
-        background: linear-gradient(
-          135deg,
-          rgba(255, 255, 255, 0.2) 13%,
-          #d47481 87%
-        );
-        color: white;
+        background: var(--pink);
+        color: var(--white);
         padding: 30px;
         text-align: center;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -52,6 +57,7 @@
         font-size: 28px;
         margin-bottom: 8px;
         font-weight: 700;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
       }
 
       .header p {
@@ -66,15 +72,16 @@
         display: flex;
         flex-direction: column;
         overflow: hidden;
+        padding: 20px;
       }
 
       .messages {
         flex: 1;
         overflow-y: auto;
-        padding: 20px;
         display: flex;
         flex-direction: column;
         gap: 15px;
+        padding: 10px;
       }
 
       .message {
@@ -101,31 +108,39 @@
       .message-content {
         max-width: 70%;
         padding: 12px 16px;
-        border-radius: 8px;
+        border-radius: var(--radius);
         word-wrap: break-word;
         line-height: 1.5;
       }
 
       .message.assistant .message-content {
-        background: #f0f0f5;
-        color: #333;
+        background: var(--white);
+        color: var(--black);
+        border: 1px solid var(--silver);
       }
 
       .message.user .message-content {
-        background: linear-gradient(135deg, #080e2c 0%, #db0b7332 100%);
-        color: white;
+        background: var(--purple);
+        color: var(--white);
+      }
+
+      .message.moxie .message-content {
+        background: linear-gradient(135deg, #ff2d9520, #7d2cff20);
+        border-left: 3px solid var(--pink);
+        color: var(--purple);
+        font-style: italic;
       }
 
       .message.system .message-content {
         background: #fffbea;
-        color: #d47481;
-        border-left: 3px solid #b70f47;
+        color: var(--pink);
+        border-left: 3px solid var(--pink);
       }
 
       .input-area {
         padding: 20px;
-        border-top: 1px solid #eee;
-        background: #fafafa;
+        border-top: 1px solid var(--silver);
+        background: var(--cream);
       }
 
       .input-group {
@@ -138,26 +153,28 @@
       textarea {
         flex: 1;
         padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 6px;
+        border: 1px solid var(--silver);
+        border-radius: var(--radius);
         font-family: inherit;
         font-size: 14px;
         resize: none;
+        background: var(--white);
+        color: var(--black);
       }
 
       input[type="text"]:focus,
       textarea:focus {
         outline: none;
-        border-color: #010413;
-        box-shadow: 0 0 0 3px #db0b7332;
+        border-color: var(--pink);
+        box-shadow: 0 0 0 3px rgba(255, 45, 149, 0.1);
       }
 
       button {
         padding: 12px 20px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
+        background: var(--purple);
+        color: var(--white);
         border: none;
-        border-radius: 6px;
+        border-radius: var(--radius);
         cursor: pointer;
         font-weight: 600;
         font-size: 14px;
@@ -166,7 +183,7 @@
 
       button:hover:not(:disabled) {
         transform: translateY(-2px);
-        box-shadow: 0 5px 15px #ff2207;
+        box-shadow: 0 5px 15px rgba(125, 44, 255, 0.4);
       }
 
       button:disabled {
@@ -174,53 +191,22 @@
         cursor: not-allowed;
       }
 
-      .sherlock-section {
-        margin-top: 10px;
-        padding-top: 10px;
-        border-top: 1px solid #ddd;
-      }
-
-      .sherlock-section label {
-        display: block;
-        font-size: 12px;
-        color: #666;
-        margin-bottom: 8px;
-        font-weight: 600;
-      }
-
-      .sherlock-input-group {
-        display: flex;
-        gap: 10px;
-      }
-
-      .sherlock-input-group input {
-        flex: 1;
-      }
-
-      .sherlock-input-group button {
-        background: linear-gradient(135deg, #fb93a8 0%, #f5576c 100%);
-      }
-
-      .sherlock-input-group button:hover:not(:disabled) {
-        box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
-      }
-
       .status {
         padding: 10px;
         margin-top: 10px;
         font-size: 12px;
-        color: #666;
+        color: var(--gray);
         text-align: center;
       }
 
       .status.loading {
-        color: #01071f;
+        color: var(--purple);
         font-weight: 600;
       }
 
       .status.error {
-        color: #f5576c;
-        background: #fff5f5;
+        color: var(--pink);
+        background: rgba(255, 45, 149, 0.1);
         border-radius: 4px;
         padding: 10px;
       }
@@ -230,16 +216,16 @@
       }
 
       .messages::-webkit-scrollbar-track {
-        background: #f1f1f1;
+        background: var(--cream);
       }
 
       .messages::-webkit-scrollbar-thumb {
-        background: #888;
+        background: var(--pink);
         border-radius: 4px;
       }
 
       .messages::-webkit-scrollbar-thumb:hover {
-        background: #555;
+        background: var(--purple);
       }
 
       .loading-dots {
@@ -259,14 +245,160 @@
       }
 
       @keyframes blink {
-        0%,
-        60%,
-        100% {
-          opacity: 0.5;
-        }
-        30% {
-          opacity: 1;
-        }
+        0%, 60%, 100% { opacity: 0.5; }
+        30% { opacity: 1; }
+      }
+
+      .consent-banner {
+        background: linear-gradient(135deg, var(--pink), var(--purple));
+        color: var(--white);
+        padding: 15px;
+        border-radius: var(--radius);
+        margin: 10px 0;
+        text-align: center;
+      }
+
+      .consent-banner button {
+        background: var(--white);
+        color: var(--purple);
+        margin: 0 5px;
+      }
+
+      .sherlock-info {
+        background: rgba(125, 44, 255, 0.1);
+        border-left: 3px solid var(--purple);
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 4px;
+        font-size: 13px;
+      }
+
+      .offline-badge {
+        background: var(--pink);
+        color: var(--white);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: bold;
+        margin-left: 10px;
+      }
+
+      /* Moxie Paperclip Companion */
+      #moxie-paperclip {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #ff2d95, #ff70d3, #7d2cff);
+        border-radius: 18px;
+        clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 70% 70%, 70% 100%, 30% 100%, 30% 70%, 0% 70%);
+        z-index: 1000;
+        cursor: pointer;
+        box-shadow: 0 15px 40px rgba(0,0,0,.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      #moxie-paperclip:hover {
+        transform: scale(1.1) rotate(15deg);
+        box-shadow: 0 20px 50px rgba(255, 45, 149, 0.4);
+      }
+
+      #moxie-paperclip:active {
+        transform: scale(0.95) rotate(-5deg);
+      }
+
+      #moxie-paperclip::before {
+        content: '💬';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 24px;
+        color: white;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      }
+
+      .moxie-message {
+        background: linear-gradient(135deg, #ff2d9520, #7d2cff20);
+        border-left: 3px solid #ff2d95;
+        padding: 10px 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        font-style: italic;
+        color: #7d2cff;
+      }
+
+      .moxie-checkin {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+
+      /* Command help overlay */
+      .command-help {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--cream);
+        border-radius: var(--radius);
+        padding: 20px;
+        box-shadow: var(--shadow);
+        z-index: 2000;
+        max-width: 500px;
+        width: 90%;
+      }
+
+      .command-help.hidden {
+        display: none;
+      }
+
+      .command-help h3 {
+        color: var(--purple);
+        margin-top: 0;
+      }
+
+      .command-help ul {
+        padding-left: 20px;
+      }
+
+      .command-help li {
+        margin: 8px 0;
+        color: var(--black);
+      }
+
+      .command-help code {
+        background: var(--silver);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: monospace;
+        color: var(--purple);
+      }
+
+      .command-help button {
+        margin-top: 15px;
+      }
+
+      /* Info banner for offline mode */
+      .info-banner {
+        background: linear-gradient(135deg, var(--pink)20, var(--purple)20);
+        border-left: 3px solid var(--pink);
+        padding: 10px 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        font-size: 13px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .info-banner button {
+        padding: 4px 8px;
+        font-size: 11px;
       }
     </style>
   </head>
@@ -275,8 +407,7 @@
       <div class="header">
         <h1>SXWer AI Chat Bot by SXWers</h1>
         <p>
-          Trauma-informed support tool with optional technical utilities. Your
-          pace, your choices.
+          Trauma-informed support tool with Moxie companion. Your pace, your choices.
         </p>
       </div>
 
@@ -289,56 +420,174 @@
           <input
             type="text"
             id="chat-input"
-            placeholder="Type your message here... (or use /sherlock for username checks)"
+            placeholder="Type your message here... (/sherlock username, /moxie hi, /help)"
             autocomplete="off"
           />
           <button id="send-btn">Send</button>
         </div>
-
-        <div class="sherlock-section">
-          <label>🔍 Sherlock - Username Reconnaissance</label>
-          <div class="sherlock-input-group">
-            <input
-              type="text"
-              id="sherlock-input"
-              placeholder="Enter usernames (comma-separated) to check across platforms"
-              autocomplete="off"
-            />
-            <button id="sherlock-btn">Search</button>
-          </div>
-          <p style="font-size: 11px; color: #999; margin-top: 6px">
-            💡 Tip: For your own safety verification only. Never use without
-            explicit consent.
-          </p>
-        </div>
-
         <div id="status" class="status"></div>
       </div>
     </div>
 
+    <!-- Moxie Paperclip Companion -->
+    <div id="moxie-paperclip" title="Click to talk to Moxie"></div>
+
+    <!-- Command Help Overlay -->
+    <div id="command-help" class="command-help hidden">
+      <h3>Available Commands</h3>
+      <ul>
+        <li><code>/sherlock username</code> - Check username across platforms (requires consent)</li>
+        <li><code>/moxie message</code> - Talk to Moxie companion</li>
+        <li><code>/consent yes</code> - Grant AI consent</li>
+        <li><code>/consent no</code> - Revoke AI consent</li>
+        <li><code>/help</code> - Show this help</li>
+      </ul>
+      <button onclick="document.getElementById('command-help').classList.add('hidden')">Close</button>
+    </div>
+
     <script>
+      // DOM Elements
       const messagesEl = document.getElementById("messages");
       const chatInput = document.getElementById("chat-input");
       const sendBtn = document.getElementById("send-btn");
-      const sherlockInput = document.getElementById("sherlock-input");
-      const sherlockBtn = document.getElementById("sherlock-btn");
       const statusEl = document.getElementById("status");
+      const moxieElement = document.getElementById("moxie-paperclip");
+      const commandHelp = document.getElementById("command-help");
 
-      function appendMessage(role, content, isLoading = false) {
-        const messageDiv = document.createElement("div");
+      // State
+      let consent = { ai: false, tools: false };
+      let moxieCheckInInterval = null;
+
+      // Moxie Configuration
+      const MOXIE_CONFIG = {
+        name: 'Moxie',
+        colors: {
+          pink: '#ff2d95',
+          hotPink: '#ff4fb4',
+          purple: '#7d2cff',
+          black: '#111111'
+        },
+        checkInMessages: [
+          'How are you feeling right now?',
+          'Remember, you\'re in control here.',
+          'Take a breath. I\'m here when you\'re ready.',
+          'Your pace, your choices. Always.',
+          'You\'re doing great. Want to talk about anything?',
+          'This is your space. No judgment, no pressure.',
+          'Gentle reminder: Your dignity and autonomy matter.',
+          'I\'m here to listen without judgment. What\'s on your mind?'
+        ]
+      };
+
+      // Initialize
+      function init() {
+        // Load consent from localStorage
+        const savedConsent = localStorage.getItem('sxwer_consent');
+        if (savedConsent) {
+          try {
+            consent = JSON.parse(savedConsent);
+          } catch (e) {
+            console.error('Failed to load consent:', e);
+          }
+        }
+
+        // Check if offline mode
+        fetch('/api/health')
+          .then(res => res.json())
+          .then(data => {
+            if (data.mode === 'offline') {
+              showOfflineBanner();
+            }
+            if (data.model) {
+              showModelInfo(data.model);
+            }
+          })
+          .catch(() => {
+            showOfflineBanner();
+          });
+
+        // Start Moxie check-ins
+        startMoxieCheckIns();
+
+        // Set up Moxie click handler
+        moxieElement.addEventListener('click', () => {
+          const message = prompt(`Talk to ${MOXIE_CONFIG.name}:`);
+          if (message) {
+            sendMessage(`/moxie ${message}`);
+          }
+        });
+
+        // Initial message
+        setTimeout(() => {
+          appendMessage('assistant', 
+            `Hello. I'm here to listen without judgment. This is your space.\n\n` +
+            `You can:\n` +
+            `• Chat with me about anything you're going through\n` +
+            `• Use /sherlock username to check if a username appears across platforms (for your safety)\n` +
+            `• Talk to Moxie, your cyan/pink/black neon paperclip companion\n\n` +
+            `I'm trauma-informed and prioritize your dignity and autonomy. What's on your mind?`
+          );
+        }, 100);
+      }
+
+      // Start Moxie gentle check-ins
+      function startMoxieCheckIns() {
+        if (moxieCheckInInterval) {
+          clearInterval(moxieCheckInInterval);
+        }
+        
+        moxieCheckInInterval = setInterval(() => {
+          if (Math.random() > 0.5) { // 50% chance of check-in
+            const randomIndex = Math.floor(Math.random() * MOXIE_CONFIG.checkInMessages.length);
+            const message = MOXIE_CONFIG.checkInMessages[randomIndex];
+            appendMessage('moxie', message, false, true);
+          }
+        }, 120000); // Every 2 minutes
+      }
+
+      // Show offline banner
+      function showOfflineBanner() {
+        const banner = document.createElement('div');
+        banner.className = 'info-banner';
+        banner.innerHTML = `
+          <span>💾 <strong>Offline Mode:</strong> Using local model. No API keys or network required.</span>
+          <button onclick="this.parentElement.remove()">Dismiss</button>
+        `;
+        document.querySelector('.input-area').prepend(banner);
+      }
+
+      // Show model info
+      function showModelInfo(modelName) {
+        const banner = document.createElement('div');
+        banner.className = 'info-banner';
+        banner.innerHTML = `
+          <span>🤖 <strong>Model:</strong> ${modelName} loaded successfully.</span>
+          <button onclick="this.parentElement.remove()">Dismiss</button>
+        `;
+        document.querySelector('.input-area').prepend(banner);
+      }
+
+      // Append message to chat
+      function appendMessage(role, content, isLoading = false, isMoxieCheckIn = false) {
+        const messageDiv = document.createElement('div');
         messageDiv.className = `message ${role}`;
+        if (isMoxieCheckIn) {
+          messageDiv.classList.add('moxie-checkin');
+        }
 
-        const contentDiv = document.createElement("div");
-        contentDiv.className = "message-content";
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'message-content';
 
         if (isLoading) {
-          contentDiv.innerHTML =
-            '<div class="loading-dots"><span>.</span><span>.</span><span>.</span></div>';
+          contentDiv.innerHTML = '<div class="loading-dots"><span>.</span><span>.</span><span>.</span></div>';
         } else if (Array.isArray(content)) {
-          // For Sherlock results
-          contentDiv.innerHTML = content.join("<br>");
+          contentDiv.innerHTML = content.join('<br>');
         } else {
-          contentDiv.textContent = content;
+          // Format content with line breaks
+          const lines = String(content).split('\n');
+          contentDiv.innerHTML = lines.map(line => 
+            line.trim() === '' ? '<br>' : line
+          ).join('<br>');
         }
 
         messageDiv.appendChild(contentDiv);
@@ -348,123 +597,171 @@
         return messageDiv;
       }
 
+      // Set status
       function setStatus(text, isError = false, isLoading = false) {
         statusEl.textContent = text;
-        statusEl.className = "status";
-        if (isError) statusEl.classList.add("error");
-        if (isLoading) statusEl.classList.add("loading");
+        statusEl.className = 'status';
+        if (isError) statusEl.classList.add('error');
+        if (isLoading) statusEl.classList.add('loading');
       }
 
-      async function sendMessage() {
-        const text = chatInput.value.trim();
-        if (!text) return;
+      // Send message
+      async function sendMessage(text = null) {
+        const messageText = text || chatInput.value.trim();
+        if (!messageText) return;
 
-        chatInput.value = "";
-        appendMessage("user", text);
+        if (text === null) {
+          chatInput.value = '';
+        }
 
-        const loadingMsg = appendMessage("assistant", "", true);
-        setStatus("Thinking...", false, true);
+        appendMessage('user', messageText);
+
+        const loadingMsg = appendMessage('assistant', '', true);
+        setStatus('Thinking...', false, true);
 
         try {
-          const response = await fetch("/chat", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: text }),
+          const response = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+              message: messageText,
+              consent: consent
+            })
           });
 
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
           const data = await response.json();
           loadingMsg.remove();
-          appendMessage("assistant", data.response);
-          setStatus("");
-        } catch (error) {
-          loadingMsg.remove();
-          appendMessage("system", `Error: ${error.message}`);
-          setStatus(`Error: ${error.message}`, true);
-        }
-      }
-
-      async function runSherlock() {
-        const input = sherlockInput.value.trim();
-        if (!input) return;
-
-        const usernames = input
-          .split(",")
-          .map((u) => u.trim())
-          .filter((u) => u);
-        if (usernames.length === 0) return;
-
-        sherlockInput.value = "";
-        appendMessage("user", `/sherlock ${usernames.join(", ")}`);
-
-        const loadingMsg = appendMessage("assistant", "", true);
-        setStatus("Running Sherlock search...", false, true);
-
-        try {
-          const response = await fetch("/sherlock", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ usernames }),
-          });
-
-          const data = await response.json();
-
-          if (!response.ok) {
-            throw new Error(data.error || "Sherlock request failed");
+          
+          // Handle consent response
+          if (data.consentGranted) {
+            consent = data.consent;
+            localStorage.setItem('sxwer_consent', JSON.stringify(consent));
           }
-
-          loadingMsg.remove();
-
-          // Format Sherlock results
-          const results = Array.isArray(data.results)
-            ? data.results.map((r) => {
-                const username = r.username || r.name || "Unknown";
-                const urls =
-                  r.websites
-                    ?.map((w) => `• ${w.name}: ${w.url_user}`)
-                    .join("<br>") || "No profiles found";
-                return `<strong>${username}</strong><br>${urls}`;
-              })
-            : [`Results: ${JSON.stringify(data.results).substring(0, 200)}...`];
-
-          appendMessage("assistant", results);
-          setStatus(data.message || "Sherlock search completed");
+          if (data.consentRevoked) {
+            consent = data.consent;
+            localStorage.setItem('sxwer_consent', JSON.stringify(consent));
+          }
+          
+          // Handle Sherlock results
+          if (data.results) {
+            const resultsText = data.results.map(r => {
+              const urls = r.websites?.map(w => `• ${w.name}: ${w.url_user}`).join('\n') || 'No profiles found';
+              return `**${r.username}**\n${urls}`;
+            }).join('\n\n');
+            appendMessage('assistant', resultsText);
+          } else {
+            appendMessage('assistant', data.response);
+          }
+          
+          // Handle Moxie response
+          if (data.from === 'Moxie') {
+            appendMessage('moxie', data.response);
+          }
+          
+          // Handle consent request
+          if (data.requiresConsent) {
+            showConsentDialog(data.consentType);
+          }
+          
+          setStatus(data.offline ? 'Offline mode - Local responses only' : '');
+          
         } catch (error) {
           loadingMsg.remove();
-          appendMessage("system", `Sherlock Error: ${error.message}`);
+          appendMessage('system', `Error: ${error.message}`);
           setStatus(`Error: ${error.message}`, true);
+        } finally {
+          if (text === null) {
+            chatInput.focus();
+          }
         }
       }
 
-      sendBtn.addEventListener("click", sendMessage);
-      chatInput.addEventListener("keypress", (e) => {
-        if (e.key === "Enter" && !e.shiftKey) {
+      // Show consent dialog
+      function showConsentDialog(type) {
+        const dialog = document.createElement('div');
+        dialog.className = 'consent-banner';
+        
+        if (type === 'sherlock') {
+          dialog.innerHTML = `
+            <p><strong>Sherlock requires your explicit consent.</strong></p>
+            <p>This tool searches public social media profiles for safety/verification only.</p>
+            <p>Never for surveillance of others without their knowledge.</p>
+            <p>No personal data is stored. Results are for your use only.</p>
+            <p>Do you consent to using Sherlock?</p>
+            <button onclick="grantSherlockConsent()">Yes, I consent</button>
+            <button onclick="this.parentElement.remove()">No, cancel</button>
+          `;
+        } else {
+          dialog.innerHTML = `
+            <p><strong>AI Assistance requires your consent.</strong></p>
+            <p>By default, I only use local, curated responses.</p>
+            <p>With consent, I can use AI to provide more tailored responses.</p>
+            <p>You can revoke consent at any time.</p>
+            <p>Do you consent to AI assistance?</p>
+            <button onclick="grantAIConsent()">Yes, I consent</button>
+            <button onclick="this.parentElement.remove()">No, cancel</button>
+          `;
+        }
+        
+        document.querySelector('.input-area').prepend(dialog);
+      }
+
+      // Grant Sherlock consent
+      function grantSherlockConsent() {
+        consent.tools = true;
+        localStorage.setItem('sxwer_consent', JSON.stringify(consent));
+        document.querySelector('.consent-banner').remove();
+        // Re-send the last message
+        const lastUserMessage = Array.from(document.querySelectorAll('.message.user .message-content'))
+          .pop()?.textContent;
+        if (lastUserMessage) {
+          sendMessage(lastUserMessage);
+        }
+      }
+
+      // Grant AI consent
+      function grantAIConsent() {
+        consent.ai = true;
+        localStorage.setItem('sxwer_consent', JSON.stringify(consent));
+        document.querySelector('.consent-banner').remove();
+        // Re-send the last message
+        const lastUserMessage = Array.from(document.querySelectorAll('.message.user .message-content'))
+          .pop()?.textContent;
+        if (lastUserMessage) {
+          sendMessage(lastUserMessage);
+        }
+      }
+
+      // Event Listeners
+      sendBtn.addEventListener('click', () => sendMessage());
+      
+      chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
           e.preventDefault();
           sendMessage();
         }
-      });
-
-      sherlockBtn.addEventListener("click", runSherlock);
-      sherlockInput.addEventListener("keypress", (e) => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          runSherlock();
+        
+        // Show command help on / 
+        if (e.key === '/' && chatInput.value === '/') {
+          commandHelp.classList.remove('hidden');
         }
       });
 
-      // Initial message
-      window.addEventListener("load", () => {
-        appendMessage(
-          "assistant",
-          "Hello. I'm here to listen without judgment. This is your space.\n\n" +
-            "You can:\n" +
-            "• Chat with me about anything you're going through\n" +
-            "• Use /sherlock to check if a username appears across social platforms (for your safety)\n\n" +
-            "I'm trauma-informed and prioritize your dignity and autonomy. What's on your mind?",
-        );
+      // Hide command help when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!commandHelp.contains(e.target) && e.target !== chatInput) {
+          commandHelp.classList.add('hidden');
+        }
       });
+
+      // Initialize on load
+      window.addEventListener('load', init);
     </script>
 
-    <script src="secrets.js"></script>
+    <!-- Load additional styles -->
+    <link rel="stylesheet" href="moxie.css" />
+    <link rel="stylesheet" href="riot-grrrl.css" />
+  </body>
 </html>

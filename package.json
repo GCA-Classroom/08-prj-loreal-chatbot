@@ -1,0 +1,38 @@
+{
+  "name": "sxwer-ai-chatbot",
+  "version": "1.0.0",
+  "description": "Trauma-informed, privacy-first AI support tool for sex workers - USB/Offline version",
+  "main": "server-offline.js",
+  "scripts": {
+    "start": "node server-offline.js",
+    "start:usb": "OFFLINE_MODE=true node server-offline.js",
+    "dev": "nodemon server-offline.js",
+    "bundle": "npm install --production && npm prune --production",
+    "bundle:usb": "npm run bundle && echo 'Copy entire directory to USB drive'"
+  },
+  "keywords": [
+    "sex-worker",
+    "safety",
+    "trauma-informed",
+    "privacy",
+    "offline",
+    "ai",
+    "chatbot"
+  ],
+  "author": "SXWers",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2",
+    "@mistralai/mistral-src": "^0.1.0",
+    "better-sqlite3": "^9.2.2",
+    "crypto-js": "^4.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "os": ["win32", "darwin", "linux"],
+  "cpu": ["x64", "arm64"]
+}

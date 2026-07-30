@@ -1,9 +1,48 @@
-# Secrets file containing API keys
-secrets.js
+# Dependencies
+node_modules/
 
-# wrangler files
-.wrangler
-.dev.vars*
-!.dev.vars.example
-.env*
-!.env.example
+# Local model files (large, don't commit)
+models/
+node-portable/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Build output
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# USB-specific
+usb-launcher.bat
+usb-launcher.sh
+
+# Local storage (browser)
+# Note: This is for reference, browser localStorage can't be gitignored
