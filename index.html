@@ -3,13 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat Assistant</title>
+    <title>L'Oréal — Smart Product Advisor</title>
+    <meta
+      name="description"
+      content="L'Oréal Smart Product Advisor: personalized product discovery and routines for makeup, skincare, haircare and fragrance."
+    />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <!-- Brand-approximate typefaces:
+         Jost        ≈ Avant Garde Gothic (geometric sans, menus & UI)
+         Bodoni Moda ≈ Bauer Bodoni (high-contrast serif, headings)
+         Inter       ≈ Helvetica Now (body copy) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,700&family=Inter:wght@300;400;500&family=Jost:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
@@ -19,13 +29,37 @@
     <div class="page-wrapper">
       <!------- Header / Branding ------->
       <header class="site-header">
+        <a class="logo" href="https://www.loreal.com" aria-label="L'Oréal">
+          <!-- Drop your official L'Oréal logo file here. If it can't load,
+               script.js swaps in a typographic fallback. -->
+          <img
+            class="logo-img"
+            src="loreal-logo.png"
+            alt="L'Oréal"
+            width="180"
+            height="60"
+          />
+        </a>
         <h1 class="site-title">Smart Product Advisor</h1>
+        <p class="site-tagline">Beauty guidance, tailored to you</p>
       </header>
 
       <!------- Chat Area ------->
       <main>
-        <section class="chatbox">
-          <div id="chatWindow" class="chat-window">
+        <section class="chatbox" aria-label="L'Oréal Smart Product Advisor">
+          <!-- Latest question strip: resets with every new question -->
+          <div id="latestQuestion" class="latest-question" hidden>
+            <strong>Your question</strong>
+            <span id="latestQuestionText"></span>
+          </div>
+
+          <div
+            id="chatWindow"
+            class="chat-window"
+            role="log"
+            aria-live="polite"
+            aria-atomic="false"
+          >
             <!-- messages will be appended here via JS -->
           </div>
 
@@ -39,18 +73,23 @@
               autocomplete="off"
               required
             />
-            <button type="submit" id="sendBtn">
+            <button type="submit" id="sendBtn" aria-label="Send message">
               <span class="material-icons">send</span>
               <span class="visually-hidden">Send</span>
             </button>
           </form>
+
+          <p class="chat-disclaimer">
+            AI-generated recommendations. Always check the label and consult a
+            specialist for medical concerns.
+          </p>
         </section>
       </main>
 
       <!------- Footer Links ------->
       <footer class="site-footer">
-        <p>&copy; 2025 Company Name. All rights reserved.</p>
-        <nav>
+        <p>&copy; 2025 L'Oréal. All rights reserved.</p>
+        <nav aria-label="Footer">
           <!-- These URLs are placeholders -->
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Use</a>
