@@ -68,6 +68,7 @@ chatForm.addEventListener("submit", async (e) => {
 
     // Turn the response into a JavaScript object
     const data = await response.json();
+    console.log(data);
 
     // The assistant's reply is here
     const reply = data.choices[0].message.content;
