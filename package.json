@@ -1,0 +1,10 @@
+{
+  "name": "loreal-ai-beauty-advisor",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "dev": "python3 -m http.server 8000",
+    "build:pages": "node scripts/build-pages.js"
+  }
+}

@@ -1,2 +1,13 @@
-# Secrets file containing API keys
+# Secrets and environment files
 secrets.js
+.env
+.env.*
+.dev.vars
+*.local
+
+# Dependency folders
+node_modules/
+dist/
+
+# Local Cloudflare files
+.wrangler/

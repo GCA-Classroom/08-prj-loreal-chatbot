@@ -1,0 +1,9 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "loreal-ai-beauty-advisor",
+  "main": "worker.js",
+  "compatibility_date": "2025-01-01",
+  "vars": {
+    "FRONTEND_ORIGIN": "http://localhost:8000"
+  }
+}
