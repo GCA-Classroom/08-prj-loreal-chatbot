@@ -18,9 +18,21 @@ export default {
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
     const userInput = await request.json();
 
+    const lorealInstructions = {
+      role: 'system',
+      content: `You are a L'Oréal product assistant.
+Only answer questions about L'Oréal products, L'Oréal brands, skincare,
+makeup, haircare, fragrances, and routines using L'Oréal products.
+If a question is unrelated to L'Oréal products, routines, recommendations,
+or beauty-related topics, respond exactly with:
+"unfortunelty, this is unrelated to loreal and cannot be answered"
+Do not make up product details, availability, ingredients, prices, or claims.
+If you do not know a L'Oréal-specific answer, say so clearly.`,
+    };
+
     const requestBody = {
-      model: 'gpt-4o',
-      messages: userInput.messages,
+      model: 'gpt-4.1',
+      messages: [lorealInstructions, ...userInput.messages],
       max_completion_tokens: 300,
     };
 
