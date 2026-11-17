@@ -3,62 +3,109 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat Assistant</title>
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="theme-color" content="#f7f5f2" />
+    <title>Beauty Advisor | L'Oréal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
   </head>
-
   <body>
-    <div class="page-wrapper">
-      <!------- Header / Branding ------->
-      <header class="site-header">
-        <h1 class="site-title">Smart Product Advisor</h1>
+    <div class="app">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="L'Oréal Beauty Advisor home" data-i18n-aria="home">
+          <img src="img/loreal-logo.png" alt="L'Oréal" />
+          <span class="brand-divider"></span>
+          <span data-i18n="brand">BEAUTY ADVISOR</span>
+        </a>
+        <div class="topbar-actions">
+          <span class="topbar-note"><span class="status-dot"></span> <span data-i18n="companion">Your personal beauty companion</span></span>
+          <label for="language" class="visually-hidden" data-i18n="language">Language</label>
+          <select id="language" aria-label="Language" data-i18n-aria="language">
+            <option value="en" lang="en">English</option>
+            <option value="zh-CN" lang="zh-CN">简体中文</option>
+            <option value="es" lang="es">Español</option>
+            <option value="pt" lang="pt">Português</option>
+          </select>
+        </div>
       </header>
 
-      <!------- Chat Area ------->
-      <main>
-        <section class="chatbox">
-          <div id="chatWindow" class="chat-window">
-            <!-- messages will be appended here via JS -->
+      <main class="layout">
+        <aside class="intro">
+          <div class="intro-content">
+            <div class="eyebrow"><span class="sparkle">✳</span> <span data-i18n="eyebrow">BEAUTY, MADE PERSONAL</span></div>
+            <h1><span data-i18n="headline1">A little advice.</span><br /><em data-i18n="headline2">A lot of you.</em></h1>
+            <p class="intro-copy" data-i18n="intro">Great beauty starts with a conversation. Tell us what you're looking for, and let's find your kind of beautiful.</p>
+            <div class="intro-rule"></div>
+            <p class="explore-label" data-i18n="explore">HERE FOR ALL THINGS BEAUTY</p>
+            <div class="categories" aria-label="Topics you can explore" data-i18n-aria="topics">
+              <a class="category-link" href="https://www.lorealparisusa.com/skin-care" target="_blank" rel="noopener noreferrer" data-i18n="skincare">Skincare</a>
+              <a class="category-link" href="https://www.lorealparisusa.com/makeup" target="_blank" rel="noopener noreferrer" data-i18n="makeup">Makeup</a>
+              <a class="category-link" href="https://www.lorealparisusa.com/hair-care-hair-style" target="_blank" rel="noopener noreferrer" data-i18n="haircare">Haircare</a>
+              <a class="category-link" href="https://www.lancome-usa.com/fragrance/fragrance-by-collection/" target="_blank" rel="noopener noreferrer" data-i18n="fragrance">Fragrance</a>
+            </div>
+          </div>
+          <div class="intro-bottom">
+            <span class="intro-bottom-icon">✳</span>
+            <p><span data-i18n="personal">Beauty is personal.</span><br /><strong data-i18n="yours">Let's make it yours.</strong></p>
+          </div>
+          <div class="decor decor-one"></div>
+          <div class="decor decor-two"></div>
+        </aside>
+
+        <section class="chat-panel" aria-label="Beauty advisor chat" data-i18n-aria="chat">
+          <div class="chat-header">
+            <div class="advisor-avatar" aria-hidden="true">✳</div>
+            <div class="advisor-heading">
+              <h2 data-i18n="advisor">Beauty Advisor</h2>
+              <p><span class="status-dot"></span> <span data-i18n="guide">Your AI-powered beauty guide</span></p>
+            </div>
+            <button type="button" class="reset-button" id="resetBtn" aria-label="Start a new conversation" title="Start a new conversation" data-i18n-aria="newConversation" data-i18n-title="newConversation">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 11a8 8 0 1 1-2.3-5.6M20 4v5h-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span data-i18n="newChat">New chat</span>
+            </button>
           </div>
 
-          <form id="chatForm" class="chat-form">
-            <label for="userInput" class="visually-hidden">Message</label>
-            <input
-              id="userInput"
-              name="userInput"
-              type="text"
-              placeholder="Ask me about products or routines…"
-              autocomplete="off"
-              required
-            />
-            <button type="submit" id="sendBtn">
-              <span class="material-icons">send</span>
-              <span class="visually-hidden">Send</span>
-            </button>
-          </form>
+          <div id="chatWindow" class="chat-window" role="log" aria-label="Conversation" data-i18n-aria="conversation" aria-live="polite">
+            <div class="welcome" id="welcome">
+              <div class="welcome-icon" aria-hidden="true">✳</div>
+              <p class="welcome-kicker" data-i18n="welcome">WELCOME TO YOUR BEAUTY SPACE</p>
+              <h3 data-i18n="letsTalk">Let's talk beauty.</h3>
+              <p class="welcome-copy" data-i18n="welcomeCopy">Consider me your personal beauty advisor. I'm here to help you discover products and build a routine that feels like you.</p>
+              <p class="suggestions-label" data-i18n="suggestions">NOT SURE WHERE TO START? TRY ASKING</p>
+              <div class="suggestions">
+                <button type="button" class="suggestion" data-prompt="Help me build a simple skincare routine." data-i18n-prompt="skincarePrompt">
+                  <span class="suggestion-icon">✧</span><span><span data-i18n="skincareTitle">Build my skincare routine</span><small data-i18n="skincareDescription">A little care, tailored to you</small></span><span class="arrow">↗</span>
+                </button>
+                <button type="button" class="suggestion" data-prompt="Help me find makeup for a natural everyday look." data-i18n-prompt="makeupPrompt">
+                  <span class="suggestion-icon">◒</span><span><span data-i18n="makeupTitle">Find my everyday makeup</span><small data-i18n="makeupDescription">For a look that feels like you</small></span><span class="arrow">↗</span>
+                </button>
+                <button type="button" class="suggestion" data-prompt="Help me find the right products for my hair." data-i18n-prompt="haircarePrompt">
+                  <span class="suggestion-icon">〰</span><span><span data-i18n="haircareTitle">Give my hair some love</span><small data-i18n="haircareDescription">Find your haircare match</small></span><span class="arrow">↗</span>
+                </button>
+                <button type="button" class="suggestion" data-prompt="Help me find a fragrance I'll love." data-i18n-prompt="fragrancePrompt">
+                  <span class="suggestion-icon">✿</span><span><span data-i18n="fragranceTitle">Discover a new fragrance</span><small data-i18n="fragranceDescription">Find a scent that speaks to you</small></span><span class="arrow">↗</span>
+                </button>
+              </div>
+            </div>
+            <div id="messages"></div>
+          </div>
+
+          <div class="composer-area">
+            <form id="chatForm" class="chat-form">
+              <label for="userInput" class="visually-hidden" data-i18n="yourMessage">Your message</label>
+              <input id="userInput" name="userInput" type="text" placeholder="Ask me anything about beauty..." data-i18n-placeholder="placeholder" autocomplete="off" required />
+              <button type="submit" id="sendBtn" aria-label="Send message" data-i18n-aria="send">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </form>
+            <p class="disclaimer" data-i18n="disclaimer">AI-generated advice may not always be accurate. Avoid sharing sensitive personal information.</p>
+          </div>
         </section>
       </main>
-
-      <!------- Footer Links ------->
-      <footer class="site-footer">
-        <p>&copy; 2025 Company Name. All rights reserved.</p>
-        <nav>
-          <!-- These URLs are placeholders -->
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Use</a>
-          <a href="#">Contact</a>
-        </nav>
-      </footer>
+      <footer class="footer"><span>© L'ORÉAL <span data-i18n="brand">BEAUTY ADVISOR</span></span><span><span data-i18n="footer">MADE FOR YOUR KIND OF BEAUTIFUL</span> <span class="footer-sparkle" aria-hidden="true">✳</span></span></footer>
     </div>
-
+    <script src="translations.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
