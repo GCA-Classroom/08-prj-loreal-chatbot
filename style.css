@@ -175,12 +175,21 @@ h1 em {
   margin-top: 16px;
 }
 
-.categories span {
+.category-link {
+  display: inline-block;
   padding: 8px 13px;
   border: 1px solid #d5bcb2;
   border-radius: 30px;
+  background: transparent;
   color: #785e55;
   font-size: 12px;
+  text-decoration: none;
+  transition: background .2s, border-color .2s;
+}
+
+.category-link:hover {
+  border-color: #b89589;
+  background: rgba(255, 255, 255, .35);
 }
 
 .intro-bottom {
@@ -535,11 +544,12 @@ h3 {
 
 @media (max-width: 800px) {
   .app {
-    padding: 0 20px;
+    padding: 0 16px;
   }
 
   .topbar {
-    height: 75px;
+    min-height: 72px;
+    height: auto;
   }
 
   .topbar-note {
@@ -548,6 +558,7 @@ h3 {
 
   .layout {
     grid-template-columns: 1fr;
+    min-height: 0;
   }
 
   .intro {
@@ -567,18 +578,23 @@ h3 {
   }
 
   .chat-panel {
-    min-height: 650px;
+    min-height: 0;
+    max-height: none;
   }
 
   .chat-header, .composer-area {
     padding-left: 22px;
     padding-right: 22px;
   }
+
+  .chat-window {
+    min-height: 55vh;
+  }
 }
 
 @media (max-width: 480px) {
   .app {
-    padding: 0 12px;
+    padding: 0 10px;
   }
 
   .brand {
@@ -587,19 +603,61 @@ h3 {
   }
 
   .brand img {
-    width: 93px;
+    width: 88px;
   }
 
   .brand-divider, .brand > span:last-child {
     display: none;
   }
 
+  #language {
+    max-width: 112px;
+  }
+
   .intro {
-    padding: 32px 24px;
+    padding: 28px 20px;
+  }
+
+  .intro-copy {
+    font-size: 14px;
+  }
+
+  .categories {
+    gap: 6px;
+  }
+
+  .category-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
 
   .chat-window {
-    padding: 30px 20px;
+    min-height: 50vh;
+    padding: 24px 16px;
+  }
+
+  .chat-header, .composer-area {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .chat-header {
+    gap: 8px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .welcome {
+    margin-top: 8px;
+  }
+
+  h3 {
+    font-size: clamp(32px, 9vw, 39px);
+  }
+
+  .suggestions-label {
+    margin-top: 30px;
   }
 
   .suggestions {
@@ -607,7 +665,20 @@ h3 {
   }
 
   .suggestion {
-    min-height: 68px;
+    min-height: 64px;
+  }
+
+  .message {
+    max-width: 94%;
+  }
+
+  .chat-form {
+    padding-left: 12px;
+  }
+
+  .chat-form button {
+    width: 44px;
+    height: 44px;
   }
 
   .reset-button span {
@@ -615,6 +686,8 @@ h3 {
   }
 
   .footer {
+    flex-direction: column;
+    gap: 8px;
     font-size: 8px;
   }
 }
