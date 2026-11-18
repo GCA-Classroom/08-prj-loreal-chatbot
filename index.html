@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>L'Oréal Smart Product Advisor</title>
+    <title>L'Oréal Routine Builder</title>
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <!-- Montserrat is a close, free match for L'Oréal's geometric sans-serif look -->
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
       rel="stylesheet"
@@ -21,51 +20,74 @@
       <!------- Header / Branding ------->
       <header class="site-header">
         <!-- Put the provided logo file at img/loreal-logo.png -->
-        <img
-          src="img/loreal-logo.png"
-          alt="L'Oréal Paris logo"
-          class="site-logo"
-        />
-        <h1 class="site-title">Smart Product Advisor</h1>
+        <img src="img/loreal-logo.png" alt="L'Oréal Paris logo" class="site-logo" />
+        <h1 class="site-title">Routine Builder</h1>
+        <!-- RTL extra credit: flips the whole page direction -->
+        <button type="button" id="dirToggle" class="dir-toggle">
+          RTL / LTR
+        </button>
       </header>
 
-      <!------- Chat Area ------->
-      <main>
-        <section class="chatbox">
-          <!-- Shows the user's latest question above the conversation -->
-          <p id="latestQuestion" class="latest-question"></p>
+      <!------- Filters: category dropdown + product search ------->
+      <section class="filters">
+        <label for="categoryFilter" class="visually-hidden">Category</label>
+        <select id="categoryFilter">
+          <option value="all">All categories</option>
+        </select>
 
-          <div id="chatWindow" class="chat-window">
-            <!-- messages will be appended here via JS -->
-          </div>
+        <label for="productSearch" class="visually-hidden">Search products</label>
+        <input
+          type="search"
+          id="productSearch"
+          placeholder="Search products by name or keyword…"
+          autocomplete="off"
+        />
+      </section>
 
-          <form id="chatForm" class="chat-form">
-            <label for="userInput" class="visually-hidden">Message</label>
-            <input
-              id="userInput"
-              name="userInput"
-              type="text"
-              placeholder="Ask me about products or routines…"
-              autocomplete="off"
-              required
-            />
-            <button type="submit" id="sendBtn">
-              <span class="material-icons">send</span>
-              <span class="visually-hidden">Send</span>
-            </button>
-          </form>
-        </section>
-      </main>
+      <!------- Product grid ------->
+      <section id="productsContainer" class="products-grid" aria-live="polite">
+        <!-- product cards are added here by JS -->
+      </section>
 
-      <!------- Footer Links ------->
+      <!------- Selected products ------->
+      <section class="selected-products">
+        <div class="selected-header">
+          <h2>Selected Products</h2>
+          <button type="button" id="clearBtn" class="link-btn">Clear all</button>
+        </div>
+        <div id="selectedProductsList" class="selected-list">
+          <!-- selected items are added here by JS -->
+        </div>
+        <button type="button" id="generateRoutine" class="generate-btn">
+          <span class="material-icons">auto_awesome</span>
+          Generate Routine
+        </button>
+      </section>
+
+      <!------- Chat area ------->
+      <section class="chatbox">
+        <h2>Your Routine &amp; Questions</h2>
+        <p id="latestQuestion" class="latest-question"></p>
+        <div id="chatWindow" class="chat-window"></div>
+
+        <form id="chatForm" class="chat-form">
+          <label for="userInput" class="visually-hidden">Message</label>
+          <input
+            id="userInput"
+            type="text"
+            placeholder="Ask about your routine or any beauty topic…"
+            autocomplete="off"
+            required
+          />
+          <button type="submit" id="sendBtn">
+            <span class="material-icons">send</span>
+            <span class="visually-hidden">Send</span>
+          </button>
+        </form>
+      </section>
+
       <footer class="site-footer">
         <p>&copy; 2025 L'Oréal. All rights reserved.</p>
-        <nav>
-          <!-- These URLs are placeholders -->
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Use</a>
-          <a href="#">Contact</a>
-        </nav>
       </footer>
     </div>
 
