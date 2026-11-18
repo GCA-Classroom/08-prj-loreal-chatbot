@@ -1,11 +1,19 @@
-/* —— basic reset —— */
+/* —— L'Oréal brand colors —— */
+:root {
+  --brand-red: #ff003b;
+  --brand-gold: #e3a535;
+  --brand-black: #111111;
+  --brand-grey: #666666;
+  --brand-border: #e2e2e2;
+  --brand-bg: #fafafa;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* —— body + fonts —— */
 body {
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
   color: #333;
@@ -14,53 +22,304 @@ body {
 }
 
 .page-wrapper {
-  width: 90%;
-  max-width: 900px;
+  width: 92%;
+  max-width: 1000px;
 }
 
-/* header */
+h2 {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* —— header —— */
 .site-header {
+  position: relative;
   text-align: center;
-  padding-top: 50px;
+  padding: 40px 0 20px;
+  border-bottom: 3px solid var(--brand-red);
+}
+
+.site-logo {
+  display: block;
+  height: 50px;
+  margin: 0 auto 14px;
 }
 
 .site-title {
   font-size: 22px;
-  font-weight: 500;
-  margin-bottom: 10px;
+  font-weight: 300;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
-/* chat window */
-.chatbox {
-  margin: 40px 0;
+.dir-toggle {
+  position: absolute;
+  top: 12px;
+  inset-inline-end: 0;
+  font: inherit;
+  font-size: 12px;
+  padding: 6px 10px;
+  background: #fff;
+  border: 1px solid var(--brand-border);
+  cursor: pointer;
+}
+
+/* —— filters —— */
+.filters {
+  display: flex;
+  gap: 12px;
+  margin: 30px 0 20px;
+}
+
+.filters select,
+.filters input {
+  font: inherit;
+  font-size: 15px;
+  padding: 12px;
+  border: 1px solid var(--brand-border);
+  background: #fff;
+}
+
+.filters select {
+  min-width: 200px;
+  text-transform: capitalize;
+}
+
+.filters input {
+  flex: 1;
+}
+
+.filters select:focus,
+.filters input:focus,
+button:focus-visible {
+  outline: 2px solid var(--brand-gold);
+  outline-offset: 2px;
+}
+
+/* —— product grid —— */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  padding: 30px;
+  text-align: center;
+  color: var(--brand-grey);
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--brand-border);
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* selected cards get a red border and soft shadow */
+.product-card.selected {
+  border-color: var(--brand-red);
+  box-shadow: 0 0 0 3px rgba(255, 0, 59, 0.12);
+}
+
+/* the clickable part of the card (image + text) */
+.card-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px;
+  font: inherit;
+  text-align: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.card-main img {
+  width: 100%;
+  height: 130px;
+  object-fit: contain;
+}
+
+.card-brand {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--brand-gold);
+}
+
+.card-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--brand-black);
+}
+
+.card-check {
+  font-size: 12px;
+  color: var(--brand-red);
+  font-weight: 700;
+  min-height: 16px;
+}
+
+.details-toggle {
+  font: inherit;
+  font-size: 12px;
+  padding: 8px;
+  background: var(--brand-bg);
+  border: none;
+  border-top: 1px solid var(--brand-border);
+  cursor: pointer;
+}
+
+.details-toggle:hover {
+  color: var(--brand-red);
+}
+
+.card-description {
+  padding: 12px 14px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #444;
+  border-top: 1px solid var(--brand-border);
+}
+
+/* —— selected products —— */
+.selected-products {
+  margin: 36px 0;
+  padding: 20px;
+  background: var(--brand-bg);
+  border: 1px solid var(--brand-border);
+}
+
+.selected-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.link-btn {
+  font: inherit;
+  font-size: 13px;
+  color: var(--brand-red);
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.selected-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.empty-note {
+  color: var(--brand-grey);
+  font-size: 14px;
+}
+
+.selected-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 6px 6px 12px;
+  font-size: 13px;
+  background: #fff;
+  border: 1px solid var(--brand-gold);
+}
+
+.selected-chip button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--brand-red);
+}
+
+.selected-chip .material-icons {
+  font-size: 18px;
+}
+
+.generate-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--brand-red);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.generate-btn:hover {
+  background: var(--brand-black);
+}
+
+.generate-btn:disabled {
+  background: #bbb;
+  cursor: wait;
+}
+
+/* —— chat —— */
+.latest-question {
+  min-height: 24px;
+  margin: 10px 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--brand-gold);
 }
 
 .chat-window {
-  height: 360px;
-  border: 1px solid #000;
+  height: 380px;
   padding: 20px;
-  font-size: 18px;
-  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   overflow-y: auto;
-  background: #fafafa;
-  white-space: pre-line;
+  font-size: 15px;
+  line-height: 1.5;
+  background: var(--brand-bg);
+  border: 1px solid var(--brand-black);
+  white-space: pre-wrap;
 }
 
-/* messages */
 .msg {
-  margin-bottom: 14px;
-  line-height: 1.5;
+  max-width: 85%;
+  padding: 12px 16px;
+  border-radius: 18px;
 }
 
 .msg.user {
-  color: #000;
+  align-self: flex-end;
+  color: #fff;
+  background: var(--brand-black);
+  border-end-end-radius: 4px;
 }
 
 .msg.ai {
-  color: #666666;
+  align-self: flex-start;
+  color: #222;
+  background: #fdf1d9;
+  border-end-start-radius: 4px;
 }
 
-/* input row */
 .chat-form {
   display: flex;
   gap: 12px;
@@ -70,74 +329,54 @@ body {
 .chat-form input {
   flex: 1;
   padding: 12px;
+  font: inherit;
+  font-size: 15px;
   border: 1px solid #ccc;
-  font-size: 18px;
-}
-
-.chat-form input:focus {
-  outline: 2px solid #000;
-  outline-offset: 2px;
 }
 
 .chat-form button {
-  font-size: 18px;
-  background: #000;
-  color: #fff;
-  border: none;
-  padding: 12px;
   width: 48px;
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #fff;
+  background: var(--brand-black);
+  border: none;
   cursor: pointer;
-  transition: background 0.3s;
-}
-
-.chat-form button .material-icons {
-  font-size: 24px;
+  transition: background 0.2s;
 }
 
 .chat-form button:hover {
-  background: #666666;
+  background: var(--brand-red);
 }
 
-.chat-form button:focus {
-  outline: 2px solid #000;
-  outline-offset: 2px;
+/* in RTL mode, flip the send arrow so it points the right way */
+[dir="rtl"] .chat-form .material-icons {
+  transform: scaleX(-1);
 }
 
-/* visually hidden */
 .visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;
-  padding: 0;
   margin: -1px;
+  padding: 0;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
 }
 
-/* footer */
 .site-footer {
-  margin: 60px 0 40px;
+  margin: 50px 0 40px;
   text-align: center;
-  font-size: 14px;
-  color: #666;
+  font-size: 13px;
+  color: var(--brand-grey);
 }
 
-.site-footer nav {
-  margin-top: 12px;
-}
-
-.site-footer a {
-  margin: 0 8px;
-  color: #000;
-  text-decoration: none;
-}
-
-.site-footer a:hover {
-  color: #666666;
+@media (max-width: 600px) {
+  .filters {
+    flex-direction: column;
+  }
 }
