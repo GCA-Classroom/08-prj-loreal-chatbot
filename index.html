@@ -1,64 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat Assistant</title>
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
+
+<div class="chatbox">
+
+  <!-- Latest Question Display -->
+  <div class="latest-question" id="latestQuestion" hidden>
+    <span class="latest-question-label">
+      YOUR LATEST QUESTION
+    </span>
+    <p id="latestQuestionText"></p>
+  </div>
+
+  <!-- Conversation History -->
+  <div
+    id="chatWindow"
+    class="chat-window"
+    role="log"
+    aria-live="polite"
+    aria-relevant="additions text"
+  ></div>
+
+  <!-- Chat Input -->
+  <form id="chatForm" class="chat-form">
+    <label for="userInput" class="visually-hidden">
+      Ask a beauty question
+    </label>
+
+    <input
+      type="text"
+      id="userInput"
+      placeholder="Ask me anything about beauty..."
+      autocomplete="off"
+      required
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="style.css" />
-  </head>
 
-  <body>
-    <div class="page-wrapper">
-      <!------- Header / Branding ------->
-      <header class="site-header">
-        <h1 class="site-title">Smart Product Advisor</h1>
-      </header>
+    <button type="submit" id="sendBtn">
+      Send
+    </button>
+  </form>
 
-      <!------- Chat Area ------->
-      <main>
-        <section class="chatbox">
-          <div id="chatWindow" class="chat-window">
-            <!-- messages will be appended here via JS -->
-          </div>
-
-          <form id="chatForm" class="chat-form">
-            <label for="userInput" class="visually-hidden">Message</label>
-            <input
-              id="userInput"
-              name="userInput"
-              type="text"
-              placeholder="Ask me about products or routines…"
-              autocomplete="off"
-              required
-            />
-            <button type="submit" id="sendBtn">
-              <span class="material-icons">send</span>
-              <span class="visually-hidden">Send</span>
-            </button>
-          </form>
-        </section>
-      </main>
-
-      <!------- Footer Links ------->
-      <footer class="site-footer">
-        <p>&copy; 2025 Company Name. All rights reserved.</p>
-        <nav>
-          <!-- These URLs are placeholders -->
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Use</a>
-          <a href="#">Contact</a>
-        </nav>
-      </footer>
-    </div>
-
-    <script src="script.js"></script>
-  </body>
-</html>
+</div>
