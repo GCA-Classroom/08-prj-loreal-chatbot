@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -19,13 +19,16 @@
     <div class="page-wrapper">
       <!------- Header / Branding ------->
       <header class="site-header">
+        <img src="img/loreal-logo.png" alt="L'Oréal" class="site-logo" />
+        <span class="brand-rule" aria-hidden="true"></span>
         <h1 class="site-title">Smart Product Advisor</h1>
+        <p class="site-tagline">Personalized beauty routines, powered by AI</p>
       </header>
 
       <!------- Chat Area ------->
       <main>
         <section class="chatbox">
-          <div id="chatWindow" class="chat-window">
+          <div id="chatWindow" class="chat-window" aria-live="polite">
             <!-- messages will be appended here via JS -->
           </div>
 
@@ -49,7 +52,7 @@
 
       <!------- Footer Links ------->
       <footer class="site-footer">
-        <p>&copy; 2025 Company Name. All rights reserved.</p>
+        <p>&copy; 2025 L'Oréal. All rights reserved.</p>
         <nav>
           <!-- These URLs are placeholders -->
           <a href="#">Privacy Policy</a>
